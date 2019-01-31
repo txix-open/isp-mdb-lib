@@ -18,18 +18,18 @@ const (
 )
 
 type DiffDescriptor struct {
-	OldValue  interface{} `json:"oldValue,omitempty"`
-	NewValue  interface{} `json:"newValue,omitempty"`
-	Path      string      `json:"path"`
-	Operation Operation   `json:"operation"`
-	OldIndex  *int        `json:"oldIndex,omitempty"`
-	NewIndex  *int        `json:"newIndex,omitempty"`
+	OldValue       interface{} `json:"oldValue,omitempty"`
+	NewValue       interface{} `json:"newValue,omitempty"`
+	Path           string      `json:"path"`
+	Operation      Operation   `json:"operation"`
+	AdditionalData interface{} `json:"additionalData,omitempty"`
+	OldIndex       *int        `json:"oldIndex,omitempty"`
+	NewIndex       *int        `json:"newIndex,omitempty"`
 }
 
 type Delta []*DiffDescriptor
 
-func EvalDiff(left, right map[string]interface{}) (bool, Delta) {
-	c := new(diffCollector)
-	c.Delta = make(Delta, 0)
+func EvalDiff(left, right map[string]interface{}, opts ...Option) (bool, Delta) {
+	c := NewDiffCollector(opts...)
 	return cmp.Equal(left, right, c), c.Delta
 }

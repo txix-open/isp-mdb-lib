@@ -5,17 +5,22 @@ import (
 	"reflect"
 )
 
+type AdditionalDataMaker func(op Operation, x, y reflect.Value, path string, step cmp.PathStep) interface{}
+
+type Option func(dc *diffCollector)
+
 type diffCollector struct {
+	adm AdditionalDataMaker
 	cmp.Option
 	Delta
 }
 
-func (c *diffCollector) Report(x, y reflect.Value, eq bool, p cmp.Path) {
+func (dc *diffCollector) Report(x, y reflect.Value, eq bool, p cmp.Path) {
 	if eq {
 		return
 	}
 
-	newPath := make(cmp.Path, 0)
+	newPath := make(cmp.Path, 0, len(p))
 	for _, ps := range p {
 		switch ps.(type) {
 		case cmp.SliceIndex, cmp.StructField, cmp.MapIndex:
@@ -86,19 +91,40 @@ func (c *diffCollector) Report(x, y reflect.Value, eq bool, p cmp.Path) {
 		desc.OldValue = oldVal
 		desc.NewValue = newVal
 
-		l := len(c.Delta)
+		if dc.adm != nil {
+			desc.AdditionalData = dc.adm(desc.Operation, x, y, path, lastStep)
+		}
+
+		l := len(dc.Delta)
 		if l > 0 {
-			prev := c.Delta[l-1]
+			prev := dc.Delta[l-1]
 			if desc.Path == prev.Path && prev.Operation == ArrayDelete && desc.Operation == ArrayAdd {
 				desc.Operation = ArrayChange
 				desc.OldValue = prev.OldValue
 				desc.OldIndex = prev.OldIndex
-				c.Delta[l-1] = desc
+				dc.Delta[l-1] = desc
 			} else {
-				c.Delta = append(c.Delta, desc)
+				dc.Delta = append(dc.Delta, desc)
 			}
 		} else {
-			c.Delta = append(c.Delta, desc)
+			dc.Delta = append(dc.Delta, desc)
 		}
+	}
+}
+
+func NewDiffCollector(opts ...Option) *diffCollector {
+	c := new(diffCollector)
+	c.Delta = make(Delta, 0)
+
+	for _, v := range opts {
+		v(c)
+	}
+
+	return c
+}
+
+func MakeAdditionalData(f AdditionalDataMaker) Option {
+	return func(dc *diffCollector) {
+		dc.adm = f
 	}
 }

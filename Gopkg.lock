@@ -3,7 +3,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:1b1d9534e35d61e861a7356f7f2d766e57e2777dbf79be60e1ac56bbd60adf51"
+  digest = "1:c4f3970d1f30f5e9bc1751b62b7ea6127256e59fd63a3d36e166fe1121250c57"
   name = "github.com/integration-system/go-cmp"
   packages = [
     "cmp",
@@ -12,7 +12,7 @@
     "cmp/internal/value",
   ]
   pruneopts = "UT"
-  revision = "ed1c8d9bf7906aec13cf28080fdf069d7687471a"
+  revision = "ac5582987a2f25e8743e0ebb7259312adda05c23"
 
 [[projects]]
   branch = "master"
