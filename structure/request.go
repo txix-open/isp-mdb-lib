@@ -97,21 +97,19 @@ type BatchConvertForFindServiceRequest struct {
 }
 
 type ConvertAnyRequest struct {
-	Record                         *Record         `valid:"required~Required"`
-	ApplicationId                  int32           `valid:"required~Required"`
-	Protocol                       ProtocolVersion `valid:"required~Required"`
-	UndefinedAttributeDefaultValue interface{}
+	Record        *Record         `valid:"required~Required"`
+	ApplicationId int32           `valid:"required~Required"`
+	Protocol      ProtocolVersion `valid:"required~Required"`
 }
 
 type BatchConvertAnyRequest struct {
-	Record                         *Record `valid:"required~Required"`
-	AppIdList                      []int32
-	ExternalId                     string
-	Id                             uint64
-	Version                        int64
-	IsTech                         bool
-	Protocol                       ProtocolVersion `valid:"required~Required"`
-	UndefinedAttributeDefaultValue interface{}
+	Record     *Record `valid:"required~Required"`
+	AppIdList  []int32
+	ExternalId string
+	Id         uint64
+	Version    int64
+	IsTech     bool
+	Protocol   ProtocolVersion `valid:"required~Required"`
 }
 
 type ConvertErlRequest struct {
