@@ -3,6 +3,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:471f4533f0eef4b4ed8589979dbcc3ddf9adcae4deae155f8b2ba519304d98ea"
+  name = "github.com/integration-system/bellows"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "4c8f91b7fb44f44098117e503c54768dc14eddfe"
+
+[[projects]]
+  branch = "master"
   digest = "1:c4f3970d1f30f5e9bc1751b62b7ea6127256e59fd63a3d36e166fe1121250c57"
   name = "github.com/integration-system/go-cmp"
   packages = [
@@ -58,6 +66,7 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/integration-system/bellows",
     "github.com/integration-system/go-cmp/cmp",
     "github.com/integration-system/gowsdl/soap",
     "github.com/json-iterator/go",
