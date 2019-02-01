@@ -9,4 +9,5 @@ const (
 	SudirV2Find  ProtocolVersion = "sudir_v2_find"
 	JsonProtocol ProtocolVersion = "json"
 	ErlProtocol  ProtocolVersion = "erl"
+	SmaProtocol  ProtocolVersion = "sma"
 )
