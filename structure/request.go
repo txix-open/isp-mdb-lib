@@ -109,7 +109,7 @@ type BatchConvertAnyRequest struct {
 	Id         uint64
 	Version    int64
 	IsTech     bool
-	Protocol   string `valid:"required~Required"`
+	Protocol   ProtocolVersion `valid:"required~Required"`
 }
 
 type ConvertErlRequest struct {

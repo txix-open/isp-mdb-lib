@@ -52,7 +52,7 @@ type AbstractConvertResult struct {
 	ExternalId string
 	Id         uint64
 	Version    int64
-	Protocol   string
+	Protocol   ProtocolVersion
 	IsTech     bool
 	Error      *ConvertError
 }
