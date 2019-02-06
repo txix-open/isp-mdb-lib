@@ -131,7 +131,7 @@ type FilterDataRequest struct {
 	ApplicationId int32   `valid:"required~Required"`
 }
 
-type BatchДFilterDataRequest struct {
+type BatchFilterDataRequest struct {
 	Record     *Record `valid:"required~Required"`
 	AppIdList  []int32 `valid:"required~Required"`
 	ExternalId string
