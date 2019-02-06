@@ -77,6 +77,11 @@ type ErlConvertResult struct {
 	AbstractConvertResult
 }
 
+type FilterDataResult struct {
+	Result *Record
+	AbstractConvertResult
+}
+
 type BatchConvertForSudirResponse map[int32]*SudirConvertResult
 type BatchListConvertForSudirResponse map[int32][]SudirConvertResult
 
@@ -88,6 +93,9 @@ type BatchListConvertAnyResponse map[int32][]AnyConvertResult
 
 type BatchConvertErlResponse map[int32]*ErlConvertResult
 type BatchListConvertErlResponse map[int32][]ErlConvertResult
+
+type BatchFilterDataResponse map[int32]*FilterDataResult
+type BatchListFilterDataResponse map[int32][]FilterDataResult
 
 type UpsertResponse struct {
 	OldValue *entity.DataRecord

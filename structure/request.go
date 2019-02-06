@@ -124,7 +124,20 @@ type BatchConvertErlRequest struct {
 	Id         uint64
 	Version    int64
 	IsTech     bool
-	Protocol   ProtocolVersion `valid:"required~Required"`
+}
+
+type FilterDataRequest struct {
+	Record        *Record `valid:"required~Required"`
+	ApplicationId int32   `valid:"required~Required"`
+}
+
+type BatchДFilterDataRequest struct {
+	Record     *Record `valid:"required~Required"`
+	AppIdList  []int32 `valid:"required~Required"`
+	ExternalId string
+	Id         uint64
+	Version    int64
+	IsTech     bool
 }
 
 type SearchRequest struct {
