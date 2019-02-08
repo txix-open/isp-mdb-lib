@@ -48,6 +48,11 @@ type ConvertError struct {
 	Error string
 }
 
+type ConvertResponse interface {
+	GetMetadata() AbstractConvertResult
+	GetResult() interface{}
+}
+
 type AbstractConvertResult struct {
 	ExternalId string
 	Id         uint64
@@ -62,9 +67,25 @@ type SudirConvertResult struct {
 	AbstractConvertResult
 }
 
+func (r SudirConvertResult) GetMetadata() AbstractConvertResult {
+	return r.AbstractConvertResult
+}
+
+func (r SudirConvertResult) GetResult() interface{} {
+	return r.Result
+}
+
 type FindConvertResult struct {
 	Result []*MdmObject
 	AbstractConvertResult
+}
+
+func (r FindConvertResult) GetMetadata() AbstractConvertResult {
+	return r.AbstractConvertResult
+}
+
+func (r FindConvertResult) GetResult() interface{} {
+	return r.Result
 }
 
 type AnyConvertResult struct {
@@ -72,14 +93,38 @@ type AnyConvertResult struct {
 	AbstractConvertResult
 }
 
+func (r AnyConvertResult) GetMetadata() AbstractConvertResult {
+	return r.AbstractConvertResult
+}
+
+func (r AnyConvertResult) GetResult() interface{} {
+	return r.Result
+}
+
 type ErlConvertResult struct {
 	Result *erl.PersonsIncoming
 	AbstractConvertResult
 }
 
+func (r ErlConvertResult) GetMetadata() AbstractConvertResult {
+	return r.AbstractConvertResult
+}
+
+func (r ErlConvertResult) GetResult() interface{} {
+	return r.Result
+}
+
 type FilterDataResult struct {
 	Result *Record
 	AbstractConvertResult
+}
+
+func (r FilterDataResult) GetMetadata() AbstractConvertResult {
+	return r.AbstractConvertResult
+}
+
+func (r FilterDataResult) GetResult() interface{} {
+	return r.Result
 }
 
 type BatchConvertForSudirResponse map[int32]*SudirConvertResult
