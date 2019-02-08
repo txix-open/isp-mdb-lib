@@ -4,6 +4,11 @@ import (
 	"time"
 )
 
+var (
+	RecordsTableName     = "data_records"
+	TechRecordsTableName = "data_tech_records"
+)
+
 type DataRecord struct {
 	TableName string `sql:"?db_schema.data_records" json:"-"`
 
