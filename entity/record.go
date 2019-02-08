@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-var (
+const (
 	RecordsTableName     = "data_records"
 	TechRecordsTableName = "data_tech_records"
 )
