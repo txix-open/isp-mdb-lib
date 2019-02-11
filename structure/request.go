@@ -33,6 +33,15 @@ type Identities struct {
 	Ids []int64 `json:"ids" valid:"required~Required"`
 }
 
+type AbstractConvertBatchRequest struct {
+	ExternalId string
+	Id         uint64
+	Version    int64
+	Protocol   ProtocolVersion
+	IsTech     bool
+	AppIdList  []int32 `valid:"required~Required"`
+}
+
 type ConvertRequestPayload struct {
 	Data                  map[string]interface{} `valid:"required~Required"`
 	CustomData            map[string]interface{}
@@ -48,12 +57,7 @@ type ConvertDataRequest struct {
 
 type BatchConvertDataRequest struct {
 	*ConvertRequestPayload `valid:"required~Required"`
-	ExternalId             string
-	Id                     uint64
-	Version                int64
-	Protocol               ProtocolVersion
-	IsTech                 bool
-	AppIdList              []int32
+	*AbstractConvertBatchRequest
 }
 
 type Record struct {
@@ -88,12 +92,7 @@ type ConvertSearchRequest struct {
 
 type BatchConvertForFindServiceRequest struct {
 	*ConvertForFindServiceRequestPayload `valid:"required~Required"`
-	ExternalId                           string
-	Id                                   uint64
-	Version                              int64
-	Protocol                             ProtocolVersion `valid:"required~Required"`
-	IsTech                               bool
-	AppIdList                            []int32
+	*AbstractConvertBatchRequest
 }
 
 type ConvertAnyRequest struct {
@@ -103,13 +102,8 @@ type ConvertAnyRequest struct {
 }
 
 type BatchConvertAnyRequest struct {
-	Record     *Record `valid:"required~Required"`
-	AppIdList  []int32
-	ExternalId string
-	Id         uint64
-	Version    int64
-	IsTech     bool
-	Protocol   ProtocolVersion `valid:"required~Required"`
+	Record *Record `valid:"required~Required"`
+	*AbstractConvertBatchRequest
 }
 
 type ConvertErlRequest struct {
@@ -118,12 +112,8 @@ type ConvertErlRequest struct {
 }
 
 type BatchConvertErlRequest struct {
-	Record     *Record `valid:"required~Required"`
-	AppIdList  []int32 `valid:"required~Required"`
-	ExternalId string
-	Id         uint64
-	Version    int64
-	IsTech     bool
+	Record *Record `valid:"required~Required"`
+	*AbstractConvertBatchRequest
 }
 
 type FilterDataRequest struct {
@@ -132,12 +122,8 @@ type FilterDataRequest struct {
 }
 
 type BatchFilterDataRequest struct {
-	Record     *Record `valid:"required~Required"`
-	AppIdList  []int32 `valid:"required~Required"`
-	ExternalId string
-	Id         uint64
-	Version    int64
-	IsTech     bool
+	Record *Record `valid:"required~Required"`
+	*AbstractConvertBatchRequest
 }
 
 type SearchRequest struct {
