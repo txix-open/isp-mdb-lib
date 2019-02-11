@@ -6,4 +6,6 @@ const (
 	AttrArrayPrefix            = "[]"
 	AttrAcceptAny              = "*"
 	AttrPrimaryKey             = "&"
+
+	AllObjectTypes = "ALL"
 )
