@@ -31,20 +31,6 @@
   revision = "368713356c71961354e09ab9b734740ebdd94784"
 
 [[projects]]
-  branch = "master"
-  digest = "1:96cfc699b3b5b3b01906cf8d4bd2a0fea10ae24d1719cb89e583e4bd6984d689"
-  name = "github.com/integration-system/isp-mdb-lib"
-  packages = [
-    "diff",
-    "entity",
-    "query",
-    "stubsV1/erl",
-    "stubsV2/findV2",
-  ]
-  pruneopts = "UT"
-  revision = "6ed902b2abf97e5435f5efe4ecc081e3b8600d31"
-
-[[projects]]
   digest = "1:3e551bbb3a7c0ab2a2bf4660e7fcad16db089fdcfbb44b0199e62838038623ea"
   name = "github.com/json-iterator/go"
   packages = ["."]
@@ -83,11 +69,6 @@
     "github.com/integration-system/bellows",
     "github.com/integration-system/go-cmp/cmp",
     "github.com/integration-system/gowsdl/soap",
-    "github.com/integration-system/isp-mdb-lib/diff",
-    "github.com/integration-system/isp-mdb-lib/entity",
-    "github.com/integration-system/isp-mdb-lib/query",
-    "github.com/integration-system/isp-mdb-lib/stubsV1/erl",
-    "github.com/integration-system/isp-mdb-lib/stubsV2/findV2",
     "github.com/json-iterator/go",
     "google.golang.org/grpc/codes",
   ]

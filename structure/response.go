@@ -8,41 +8,6 @@ import (
 	"google.golang.org/grpc/codes"
 )
 
-type MdmObject struct {
-	ObjectType   string
-	RelationType *string
-	Attribute    []*Attribute
-	Relations    *Relations
-}
-
-type Reference struct {
-	ObjectType   string
-	RelationType *string
-	ObjectId     *string
-}
-
-type Relations struct {
-	Object []*MdmObject
-	Ref    []*Reference
-}
-
-type Attribute struct {
-	Name  *string
-	Value []*string
-}
-
-type Object struct {
-	Name      *string
-	Attribute []*Attribute
-}
-
-type EntryType struct {
-	EntryName *string
-	Seq       *int64
-	Attribute []*Attribute
-	Object    []*Object
-}
-
 type ConvertError struct {
 	Code  codes.Code
 	Error string
@@ -151,6 +116,11 @@ type UpsertResponse struct {
 
 type SearchResponse struct {
 	Items      []entity.DataRecord
+	TotalCount int64
+}
+
+type UuidSearchResponse struct {
+	Items      []string
 	TotalCount int64
 }
 
