@@ -130,5 +130,5 @@ type SearchRequest struct {
 	Limit     int `valid:"range(0|1000)"`
 	Offset    int
 	IsTech    bool
-	Condition query.Term `valid:"required~Required"`
+	Condition query.Term
 }
