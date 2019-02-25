@@ -132,3 +132,8 @@ type SearchRequest struct {
 	IsTech    bool
 	Condition query.Term
 }
+
+type FilterAttributeRequest struct {
+	Attributes    []entity.Attribute `valid:"required~Required"`
+	ApplicationId int32              `valid:"required~Required"`
+}
