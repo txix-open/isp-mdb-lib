@@ -119,9 +119,14 @@ type SearchResponse struct {
 	TotalCount int64
 }
 
-type UuidSearchResponse struct {
+type SearchIdResponse struct {
 	Items      []string
 	TotalCount int64
+}
+
+type SearchIdWithScrollResponse struct {
+	SearchIdResponse
+	ScrollId string
 }
 
 type Reason int
