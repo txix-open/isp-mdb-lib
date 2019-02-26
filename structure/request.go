@@ -4,6 +4,7 @@ import (
 	"github.com/integration-system/isp-mdb-lib/entity"
 	"github.com/integration-system/isp-mdb-lib/query"
 	"github.com/integration-system/isp-mdb-lib/stubsV2/findV2"
+	"time"
 )
 
 type Mode string
@@ -131,6 +132,13 @@ type SearchRequest struct {
 	Offset    int
 	IsTech    bool
 	Condition query.Term
+}
+
+type ScrollSearchRequest struct {
+	IsTech    bool
+	Condition query.Term
+	ScrollId  string
+	ScrollTTL time.Duration
 }
 
 type FilterAttributeRequest struct {
