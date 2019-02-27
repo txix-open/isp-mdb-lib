@@ -134,11 +134,15 @@ type SearchRequest struct {
 	Condition query.Term
 }
 
-type ScrollSearchRequest struct {
+type SearchWithScrollRequest struct {
 	IsTech    bool
 	Condition query.Term
 	ScrollId  string
 	ScrollTTL time.Duration
+	Slicing   *struct {
+		SliceId   int
+		MaxSlices int
+	}
 }
 
 type FilterAttributeRequest struct {

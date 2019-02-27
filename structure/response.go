@@ -129,6 +129,10 @@ type SearchIdWithScrollResponse struct {
 	ScrollId string
 }
 
+type PreferredSearchSlicesResponse struct {
+	MaxSlices int
+}
+
 type Reason int
 
 const (
