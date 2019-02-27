@@ -6,6 +6,11 @@ type AsyncSearchRequest struct {
 	PackageSize int
 	Callback    string
 	Protocol    ProtocolVersion
+	Amqp        *struct {
+		Exchange   string
+		RoutingKey string
+		Create     bool
+	}
 }
 
 type ExternalAsyncSearchRequest struct {
