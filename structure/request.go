@@ -154,3 +154,8 @@ type FilterAttributeRequest struct {
 	Attributes    []entity.Attribute `valid:"required~Required"`
 	ApplicationId int32              `valid:"required~Required"`
 }
+
+type DataExternalIdLst struct {
+	ExternalList []string
+	TechRecord   bool
+}
