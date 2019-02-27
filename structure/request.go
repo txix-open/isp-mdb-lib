@@ -146,6 +146,10 @@ type SearchWithScrollRequest struct {
 	}
 }
 
+type PreferredSearchSlicesRequest struct {
+	IsTech bool
+}
+
 type FilterAttributeRequest struct {
 	Attributes    []entity.Attribute `valid:"required~Required"`
 	ApplicationId int32              `valid:"required~Required"`
