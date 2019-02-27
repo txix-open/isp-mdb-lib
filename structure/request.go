@@ -137,6 +137,7 @@ type SearchRequest struct {
 type SearchWithScrollRequest struct {
 	IsTech    bool
 	Condition query.Term
+	BatchSize int
 	ScrollId  string
 	ScrollTTL time.Duration
 	Slicing   *struct {
