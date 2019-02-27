@@ -5,6 +5,7 @@ import "github.com/integration-system/isp-mdb-lib/query"
 type Amqp struct {
 	ExchangeName string
 	ExchangeKind string
+	QueueName    string
 	RoutingKey   string
 	Declare      bool
 }
