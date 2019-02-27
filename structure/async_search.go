@@ -3,9 +3,10 @@ package structure
 import "github.com/integration-system/isp-mdb-lib/query"
 
 type Amqp struct {
-	Exchange   string
-	RoutingKey string
-	Create     bool
+	ExchangeName string
+	ExchangeKind string
+	RoutingKey   string
+	Declare      bool
 }
 
 type AsyncSearchRequest struct {
