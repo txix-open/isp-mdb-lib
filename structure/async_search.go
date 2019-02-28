@@ -12,6 +12,7 @@ type Amqp struct {
 
 type AsyncSearchRequest struct {
 	PackageSize int
+	TechEntries bool
 	Callback    string
 	Protocol    ProtocolVersion
 	Amqp        *Amqp
