@@ -24,6 +24,11 @@ type DataRecordByExternalId struct {
 	TechRecord bool
 }
 
+type DataRecordsByExternalIdList struct {
+	ExternalIdList []string `valid:"required~Required"`
+	TechRecord     bool
+}
+
 type MdmHandleRequest struct {
 	TechRecord  bool
 	OperationId string
@@ -153,9 +158,4 @@ type PreferredSearchSlicesRequest struct {
 type FilterAttributeRequest struct {
 	Attributes    []entity.Attribute `valid:"required~Required"`
 	ApplicationId int32              `valid:"required~Required"`
-}
-
-type DataExternalIdLst struct {
-	ExternalList []string
-	TechRecord   bool
 }
