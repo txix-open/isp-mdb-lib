@@ -29,3 +29,13 @@ type InternalAsyncSearchRequest struct {
 	JobCountLimit int
 	AsyncSearchRequest
 }
+
+type GetJobStatusRequest struct {
+	RequestId string
+}
+
+type GetAsyncResultRequest struct {
+	RequestId string
+	Limit     int
+	Offset    int
+}

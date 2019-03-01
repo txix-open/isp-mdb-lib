@@ -6,6 +6,7 @@ import (
 	"github.com/integration-system/isp-mdb-lib/query"
 	"github.com/integration-system/isp-mdb-lib/stubsV1/erl"
 	"google.golang.org/grpc/codes"
+	"time"
 )
 
 type ConvertError struct {
@@ -131,6 +132,17 @@ type SearchIdWithScrollResponse struct {
 
 type PreferredSearchSlicesResponse struct {
 	MaxSlices int
+}
+
+type GetJobStatusResponse struct {
+	Status          string
+	CreatedAt       time.Time
+	FinishedAt      time.Time
+	ExecutedTime    string
+	TtlUntil        time.Time
+	Description     string
+	PackagesCount   int
+	ExecutedEntries int64
 }
 
 type Reason int
