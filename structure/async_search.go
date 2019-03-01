@@ -27,6 +27,7 @@ type InternalAsyncSearchRequest struct {
 	Query         query.Term
 	ApplicationId int
 	JobCountLimit int
+	RequestId     string
 	AsyncSearchRequest
 }
 
