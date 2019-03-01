@@ -151,6 +151,10 @@ type SearchWithScrollRequest struct {
 	}
 }
 
+type GetJobStatusRequest struct {
+	RequestId string
+}
+
 type PreferredSearchSlicesRequest struct {
 	IsTech bool
 }
