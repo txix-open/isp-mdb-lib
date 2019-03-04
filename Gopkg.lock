@@ -2,6 +2,29 @@
 
 
 [[projects]]
+  digest = "1:320e7ead93de9fd2b0e59b50fd92a4d50c1f8ab455d96bc2eb083267453a9709"
+  name = "github.com/asaskevich/govalidator"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "ccb8e960c48f04d6935e72476ae4a51028f9e22f"
+  version = "v9"
+
+[[projects]]
+  digest = "1:57bf08b3ada129d5d845734e80096504898445ece891e87ce371d5d67a18a079"
+  name = "github.com/golang/protobuf"
+  packages = [
+    "proto",
+    "ptypes",
+    "ptypes/any",
+    "ptypes/duration",
+    "ptypes/struct",
+    "ptypes/timestamp",
+  ]
+  pruneopts = "UT"
+  revision = "c823c79ea1570fb5ff454033735a8e68575d1d0f"
+  version = "v1.3.0"
+
+[[projects]]
   branch = "master"
   digest = "1:471f4533f0eef4b4ed8589979dbcc3ddf9adcae4deae155f8b2ba519304d98ea"
   name = "github.com/integration-system/bellows"
@@ -31,12 +54,84 @@
   revision = "368713356c71961354e09ab9b734740ebdd94784"
 
 [[projects]]
-  digest = "1:3e551bbb3a7c0ab2a2bf4660e7fcad16db089fdcfbb44b0199e62838038623ea"
+  branch = "master"
+  digest = "1:fb1ca4e31877d73535d6b7194a1bb903739758eafb9f0fb15a0ee44a67ec693d"
+  name = "github.com/integration-system/isp-lib"
+  packages = [
+    "backend",
+    "http",
+    "logger",
+    "modules",
+    "proto/stubs",
+    "streaming",
+    "structure",
+    "utils",
+  ]
+  pruneopts = "UT"
+  revision = "ddd8675f93a166e360fa22ef796e643bc39691cd"
+
+[[projects]]
+  digest = "1:5d713dbcad44f3358fec51fd5573d4f733c02cac5a40dcb177787ad5ffe9272f"
   name = "github.com/json-iterator/go"
-  packages = ["."]
+  packages = [
+    ".",
+    "extra",
+  ]
   pruneopts = "UT"
   revision = "1624edc4454b8682399def8740d46db5e4362ba4"
   version = "v1.1.5"
+
+[[projects]]
+  digest = "1:aaa8e0e7e35d92e21daed3f241832cee73d15ca1cd3302ba3843159a959a7eac"
+  name = "github.com/klauspost/compress"
+  packages = [
+    "flate",
+    "gzip",
+    "zlib",
+  ]
+  pruneopts = "UT"
+  revision = "30be6041bed523c18e269a700ebd9c2ea9328574"
+  version = "v1.4.1"
+
+[[projects]]
+  digest = "1:2d643962fac133904694fffa959bc3c5dcfdcee38c6f5ffdd99a3c93eb9c835c"
+  name = "github.com/klauspost/cpuid"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "e7e905edc00ea8827e58662220139109efea09db"
+  version = "v1.2.0"
+
+[[projects]]
+  digest = "1:31e761d97c76151dde79e9d28964a812c46efc5baee4085b86f68f0c654450de"
+  name = "github.com/konsorten/go-windows-terminal-sequences"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "f55edac94c9bbba5d6182a4be46d86a2c9b5b50e"
+  version = "v1.0.2"
+
+[[projects]]
+  digest = "1:2fa7b0155cd54479a755c629de26f888a918e13f8857a2c442205d825368e084"
+  name = "github.com/mattn/go-colorable"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "3a70a971f94a22f2fa562ffcc7a0eb45f5daf045"
+  version = "v0.1.1"
+
+[[projects]]
+  digest = "1:3bb9c8451d199650bfd303e0068d86f135952fead374ad87c09a9b8a2cc4bd7c"
+  name = "github.com/mattn/go-isatty"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "369ecd8cea9851e459abb67eb171853e3986591e"
+  version = "v0.0.6"
+
+[[projects]]
+  branch = "master"
+  digest = "1:2b32af4d2a529083275afc192d1067d8126b578c7a9613b26600e4df9c735155"
+  name = "github.com/mgutz/ansi"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "9520e82c474b0a04dd04f8a40959027271bab992"
 
 [[projects]]
   digest = "1:33422d238f147d247752996a26574ac48dcf472976eda7f5134015f06bf16563"
@@ -55,12 +150,157 @@
   version = "1.0.1"
 
 [[projects]]
-  digest = "1:8061e1ede5067e386972621147c69c9183d3dc3215056465206fc4202b3a15e7"
+  digest = "1:87c2e02fb01c27060ccc5ba7c5a407cc91147726f8f40b70cceeedbc52b1f3a8"
+  name = "github.com/sirupsen/logrus"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "e1e72e9de974bd926e5c56f83753fba2df402ce5"
+  version = "v1.3.0"
+
+[[projects]]
+  digest = "1:c468422f334a6b46a19448ad59aaffdfc0a36b08fdcc1c749a0b29b6453d7e59"
+  name = "github.com/valyala/bytebufferpool"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7"
+  version = "v1.0.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:96862cda508b66efced457520dfe767ede13fbff78884e35dc3d241164d07ea7"
+  name = "github.com/valyala/fasthttp"
+  packages = [
+    ".",
+    "fasthttputil",
+    "stackless",
+  ]
+  pruneopts = "UT"
+  revision = "733a6505a93f9928bcbe5f6cdedd3f9a2645f02b"
+
+[[projects]]
+  digest = "1:39a425f98fb19427061a693fe6bf0683c9bddec4b25b17067e34fdb465e39cb9"
+  name = "github.com/x-cray/logrus-prefixed-formatter"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "bb2702d423886830dee131692131d35648c382e2"
+  version = "v0.5.2"
+
+[[projects]]
+  branch = "master"
+  digest = "1:fde12c4da6237363bf36b81b59aa36a43d28061167ec4acb0d41fc49464e28b9"
+  name = "golang.org/x/crypto"
+  packages = ["ssh/terminal"]
+  pruneopts = "UT"
+  revision = "7f87c0fbb88b590338857bcb720678c2583d4dea"
+
+[[projects]]
+  branch = "master"
+  digest = "1:4512c74e2c934a151fa9246cdc565d29611f53295bfb05e7a6275e80ee540a0c"
+  name = "golang.org/x/net"
+  packages = [
+    "context",
+    "http/httpguts",
+    "http2",
+    "http2/hpack",
+    "idna",
+    "internal/timeseries",
+    "trace",
+  ]
+  pruneopts = "UT"
+  revision = "312bce6e941fc7e152b630a8643ea239afc12ddd"
+
+[[projects]]
+  branch = "master"
+  digest = "1:80200f57d482f61334a482a046ddedbad77c04dbec6ab81a4e1b3c6adbdfadef"
+  name = "golang.org/x/sys"
+  packages = [
+    "unix",
+    "windows",
+  ]
+  pruneopts = "UT"
+  revision = "775f8194d0f9e65c46913c7be783d3d95a29333c"
+
+[[projects]]
+  digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
+  name = "golang.org/x/text"
+  packages = [
+    "collate",
+    "collate/build",
+    "internal/colltab",
+    "internal/gen",
+    "internal/tag",
+    "internal/triegen",
+    "internal/ucd",
+    "language",
+    "secure/bidirule",
+    "transform",
+    "unicode/bidi",
+    "unicode/cldr",
+    "unicode/norm",
+    "unicode/rangetable",
+  ]
+  pruneopts = "UT"
+  revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
+  version = "v0.3.0"
+
+[[projects]]
+  branch = "master"
+  digest = "1:bb1d7b9f535fd3f634440825c1ee5c36b3f2c12318a6152ea2575d31f5a7502a"
+  name = "google.golang.org/genproto"
+  packages = [
+    "googleapis/rpc/errdetails",
+    "googleapis/rpc/status",
+  ]
+  pruneopts = "UT"
+  revision = "fc2db5cae922db113989ef87b5b859cc8a179f59"
+
+[[projects]]
+  digest = "1:9ab5a33d8cb5c120602a34d2e985ce17956a4e8c2edce7e6961568f95e40c09a"
   name = "google.golang.org/grpc"
-  packages = ["codes"]
+  packages = [
+    ".",
+    "balancer",
+    "balancer/base",
+    "balancer/roundrobin",
+    "binarylog/grpc_binarylog_v1",
+    "codes",
+    "connectivity",
+    "credentials",
+    "credentials/internal",
+    "encoding",
+    "encoding/proto",
+    "grpclog",
+    "internal",
+    "internal/backoff",
+    "internal/binarylog",
+    "internal/channelz",
+    "internal/envconfig",
+    "internal/grpcrand",
+    "internal/grpcsync",
+    "internal/syscall",
+    "internal/transport",
+    "keepalive",
+    "metadata",
+    "naming",
+    "peer",
+    "resolver",
+    "resolver/dns",
+    "resolver/passthrough",
+    "stats",
+    "status",
+    "tap",
+  ]
   pruneopts = "UT"
   revision = "a02b0774206b209466313a0b525d2c738fe407eb"
   version = "v1.18.0"
+
+[[projects]]
+  digest = "1:c805e517269b0ba4c21ded5836019ed7d16953d4026cb7d00041d039c7906be9"
+  name = "gopkg.in/natefinch/lumberjack.v2"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "a96e63847dc3c67d17befa69c303767e2f84e54f"
+  version = "v2.1"
 
 [solve-meta]
   analyzer-name = "dep"
@@ -69,6 +309,8 @@
     "github.com/integration-system/bellows",
     "github.com/integration-system/go-cmp/cmp",
     "github.com/integration-system/gowsdl/soap",
+    "github.com/integration-system/isp-lib/backend",
+    "github.com/integration-system/isp-lib/modules",
     "github.com/json-iterator/go",
     "google.golang.org/grpc/codes",
   ]
