@@ -135,6 +135,7 @@ type PreferredSearchSlicesResponse struct {
 }
 
 type GetJobStatusResponse struct {
+	RequestId       string
 	Status          string `json:",omitempty"`
 	CreatedAt       time.Time
 	FinishedAt      time.Time `json:",omitempty"`
