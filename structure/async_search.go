@@ -25,7 +25,7 @@ type ExternalAsyncSearchRequest struct {
 
 type InternalAsyncSearchRequest struct {
 	Query         query.Term
-	ApplicationId int `valid:"required~Required"`
+	ApplicationId int32 `valid:"required~Required"`
 	JobCountLimit int
 	RequestId     string `valid:"required~Required"`
 	AsyncSearchRequest
