@@ -3,11 +3,11 @@ package structure
 import "github.com/integration-system/isp-mdb-lib/query"
 
 type Amqp struct {
-	ExchangeName string `valid:"required~Required"`
-	ExchangeKind string
-	QueueName    string
-	RoutingKey   string `valid:"required~Required"`
-	Declare      bool
+	ExchangeName string `valid:"required~Required" schema:"Exchange name"`
+	ExchangeKind string `schema:"Exchange kind,'direct','topic','fanout'. Default:'direct'"`
+	QueueName    string `schema:"Queue name"`
+	RoutingKey   string `valid:"required~Required" schema:"Routing key"`
+	Declare      bool   `schema:"Auto declaration,If enable it automatically declares queue, exchange and binding"`
 }
 
 type AsyncSearchRequest struct {
