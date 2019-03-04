@@ -133,7 +133,7 @@ type BatchFilterDataRequest struct {
 }
 
 type SearchRequest struct {
-	Limit     int `valid:"range(0|1000)"`
+	Limit     int
 	Offset    int
 	IsTech    bool
 	Condition query.Term
@@ -142,9 +142,9 @@ type SearchRequest struct {
 type SearchWithScrollRequest struct {
 	IsTech    bool
 	Condition query.Term
-	BatchSize int
+	BatchSize int `valid:"required~Required"`
 	ScrollId  string
-	ScrollTTL time.Duration
+	ScrollTTL time.Duration `valid:"required~Required"`
 	Slicing   *struct {
 		SliceId   int
 		MaxSlices int

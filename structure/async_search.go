@@ -3,10 +3,10 @@ package structure
 import "github.com/integration-system/isp-mdb-lib/query"
 
 type Amqp struct {
-	ExchangeName string
+	ExchangeName string `valid:"required~Required"`
 	ExchangeKind string
 	QueueName    string
-	RoutingKey   string
+	RoutingKey   string `valid:"required~Required"`
 	Declare      bool
 }
 
@@ -25,18 +25,18 @@ type ExternalAsyncSearchRequest struct {
 
 type InternalAsyncSearchRequest struct {
 	Query         query.Term
-	ApplicationId int
+	ApplicationId int `valid:"required~Required"`
 	JobCountLimit int
-	RequestId     string
+	RequestId     string `valid:"required~Required"`
 	AsyncSearchRequest
 }
 
 type GetJobStatusRequest struct {
-	RequestId string
+	RequestId string `valid:"required~Required"`
 }
 
 type GetAsyncResultRequest struct {
-	RequestId string
+	RequestId string `valid:"required~Required"`
 	Limit     int
 	Offset    int
 }
