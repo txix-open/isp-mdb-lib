@@ -19,7 +19,7 @@ type AsyncSearchRequest struct {
 }
 
 type ExternalAsyncSearchRequest struct {
-	Query map[string]interface{}
+	Query map[string]interface{} `valid:"required~Required"`
 	AsyncSearchRequest
 }
 
