@@ -5,11 +5,16 @@ import (
 	"github.com/integration-system/isp-mdb-lib/query"
 	"github.com/integration-system/isp-mdb-lib/stubsV1/erl"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 type ConvertError struct {
 	Code  codes.Code
 	Error string
+}
+
+func (e *ConvertError) ToGrpcError() error {
+	return status.Error(e.Code, e.Error)
 }
 
 type ConvertResponse interface {

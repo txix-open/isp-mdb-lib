@@ -313,6 +313,7 @@
     "github.com/integration-system/isp-lib/modules",
     "github.com/json-iterator/go",
     "google.golang.org/grpc/codes",
+    "google.golang.org/grpc/status",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
