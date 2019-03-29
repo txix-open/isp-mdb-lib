@@ -23,8 +23,8 @@ const (
 )
 
 type Term struct {
-	LogicOperation  *LogicOperation
-	BinaryOperation *BinaryOperation
+	LogicOperation  *LogicOperation  `schema:"Logic operation"`
+	BinaryOperation *BinaryOperation `schema:"Binary operation"`
 }
 
 func (t Term) IsLogic() bool {
@@ -40,11 +40,11 @@ func (t Term) IsValid() bool {
 }
 
 type BinaryOperation struct {
-	Operator       Operator
-	Value          string
-	Field          string
-	SearchInCustom bool
-	IsPrimaryKey   bool
+	Operator       Operator `schema:"Operation,[=,!=,<,>,<=,>=,contains,not contains, starts with, not starts with, ends with, not ends with]"`
+	Value          string   `schema:"Logic operation"`
+	Field          string   `schema:"Field"`
+	SearchInCustom bool     `schema:"Search in custom data"`
+	IsPrimaryKey   bool     `schema:"Is primary key"`
 }
 
 func (bo BinaryOperation) IsValid() bool {
@@ -52,8 +52,8 @@ func (bo BinaryOperation) IsValid() bool {
 }
 
 type LogicOperation struct {
-	LogicOperator LogicOperator
-	Terms         []Term
+	LogicOperator LogicOperator `schema:"Operator,['AND', 'OR']"`
+	Terms         []Term        `schema:"Terms"`
 }
 
 func (lo LogicOperation) IsValid() bool {
