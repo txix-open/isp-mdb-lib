@@ -102,7 +102,7 @@ func (s *ConverterService) filterData(req []structure.BatchFilterDataRequest, re
 func (s *ConverterService) filterSearchRequest(req structure.FilterSearchRequest, resPtr interface{}) error {
 	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
-			modules.MdmDumperLinks.MdmConverterService.FilterBatchList,
+			modules.MdmApiLinks.MdmConverterService.FilterSearchRequest,
 			s.callerId,
 			req,
 			resPtr,

@@ -20,6 +20,11 @@ func (s *SearchService) Search(req structure.SearchRequest) (structure.BatchList
 	return res, s.convertSearch(req, &res)
 }
 
+func (s *SearchService) SearchCount(req structure.CountRequest) (structure.BatchListFilterDataResponse, error) {
+	res := make(structure.BatchListFilterDataResponse)
+	return res, s.convertCount(req, &res)
+}
+
 func (s *SearchService) SearchIdList(req structure.SearchRequest) (structure.BatchListFilterDataResponse, error) {
 	res := make(structure.BatchListFilterDataResponse)
 	return res, s.convertSearchIdList(req, &res)
@@ -101,10 +106,21 @@ func (s *SearchService) ParallelSearchWithScrolls(
 	}
 }
 
+func (s *SearchService) convertCount(req structure.CountRequest, resPtr interface{}) error {
+	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
+		return c.Invoke(
+			modules.MdmDumperLinks.MdmSearchService.Count,
+			s.callerId,
+			req,
+			resPtr,
+		)
+	})
+}
+
 func (s *SearchService) convertSearch(req structure.SearchRequest, resPtr interface{}) error {
 	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
-			modules.MdmAsyncApiLinks.MdmSearchService.SearchIdWithScroll,
+			modules.MdmApiLinks.MdmSearchService.Search,
 			s.callerId,
 			req,
 			resPtr,
@@ -115,7 +131,7 @@ func (s *SearchService) convertSearch(req structure.SearchRequest, resPtr interf
 func (s *SearchService) convertSearchIdList(req structure.SearchRequest, resPtr interface{}) error {
 	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
-			modules.MdmAsyncApiLinks.MdmSearchService.SearchIdWithScroll,
+			modules.MdmApiLinks.MdmSearchService.SearchIdList,
 			s.callerId,
 			req,
 			resPtr,
@@ -137,7 +153,7 @@ func (s *SearchService) convertSearchIdWithScroll(req structure.SearchWithScroll
 func (s *SearchService) convertGetPreferredSlicesCount(isTech bool, resPtr interface{}) error {
 	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
-			modules.MdmAsyncApiLinks.MdmSearchService.SearchIdWithScroll,
+			modules.MdmAsyncApiLinks.MdmSearchService.PreferredSlicesCount,
 			s.callerId,
 			structure.PreferredSearchSlicesRequest{IsTech: isTech},
 			resPtr,

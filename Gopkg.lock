@@ -54,13 +54,11 @@
   revision = "368713356c71961354e09ab9b734740ebdd94784"
 
 [[projects]]
-  branch = "master"
-  digest = "1:86c1d70691f8d8db0c8305fa7e8e175878bc41dfdc90c04504269c9c1b96ce23"
+  digest = "1:012f403c7f2f7746b6ffdee5ed5f1a2941558420d464de4d6bd487538f984413"
   name = "github.com/integration-system/isp-lib"
   packages = [
     "atomic",
     "backend",
-    "http",
     "logger",
     "modules",
     "proto/stubs",
@@ -69,7 +67,8 @@
     "utils",
   ]
   pruneopts = "UT"
-  revision = "ddd8675f93a166e360fa22ef796e643bc39691cd"
+  revision = "5640d3f7cf4e57740b54324cf7ebfe4cab2a598f"
+  version = "v1.1.1"
 
 [[projects]]
   digest = "1:5d713dbcad44f3358fec51fd5573d4f733c02cac5a40dcb177787ad5ffe9272f"
@@ -81,26 +80,6 @@
   pruneopts = "UT"
   revision = "1624edc4454b8682399def8740d46db5e4362ba4"
   version = "v1.1.5"
-
-[[projects]]
-  digest = "1:aaa8e0e7e35d92e21daed3f241832cee73d15ca1cd3302ba3843159a959a7eac"
-  name = "github.com/klauspost/compress"
-  packages = [
-    "flate",
-    "gzip",
-    "zlib",
-  ]
-  pruneopts = "UT"
-  revision = "30be6041bed523c18e269a700ebd9c2ea9328574"
-  version = "v1.4.1"
-
-[[projects]]
-  digest = "1:2d643962fac133904694fffa959bc3c5dcfdcee38c6f5ffdd99a3c93eb9c835c"
-  name = "github.com/klauspost/cpuid"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "e7e905edc00ea8827e58662220139109efea09db"
-  version = "v1.2.0"
 
 [[projects]]
   digest = "1:31e761d97c76151dde79e9d28964a812c46efc5baee4085b86f68f0c654450de"
@@ -157,26 +136,6 @@
   pruneopts = "UT"
   revision = "e1e72e9de974bd926e5c56f83753fba2df402ce5"
   version = "v1.3.0"
-
-[[projects]]
-  digest = "1:c468422f334a6b46a19448ad59aaffdfc0a36b08fdcc1c749a0b29b6453d7e59"
-  name = "github.com/valyala/bytebufferpool"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7"
-  version = "v1.0.0"
-
-[[projects]]
-  branch = "master"
-  digest = "1:96862cda508b66efced457520dfe767ede13fbff78884e35dc3d241164d07ea7"
-  name = "github.com/valyala/fasthttp"
-  packages = [
-    ".",
-    "fasthttputil",
-    "stackless",
-  ]
-  pruneopts = "UT"
-  revision = "733a6505a93f9928bcbe5f6cdedd3f9a2645f02b"
 
 [[projects]]
   digest = "1:39a425f98fb19427061a693fe6bf0683c9bddec4b25b17067e34fdb465e39cb9"
@@ -294,14 +253,6 @@
   pruneopts = "UT"
   revision = "a02b0774206b209466313a0b525d2c738fe407eb"
   version = "v1.18.0"
-
-[[projects]]
-  digest = "1:c805e517269b0ba4c21ded5836019ed7d16953d4026cb7d00041d039c7906be9"
-  name = "gopkg.in/natefinch/lumberjack.v2"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "a96e63847dc3c67d17befa69c303767e2f84e54f"
-  version = "v2.1"
 
 [solve-meta]
   analyzer-name = "dep"
