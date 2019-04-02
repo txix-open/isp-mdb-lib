@@ -12,6 +12,11 @@ type SearchRequest struct {
 	Condition query.Term
 }
 
+type CountRequest struct {
+	IsTech    bool
+	Condition query.Term
+}
+
 type SearchWithScrollRequest struct {
 	IsTech    bool
 	Condition query.Term
