@@ -39,9 +39,9 @@ func (s *ConverterService) FilterData(req []structure.BatchFilterDataRequest) (s
 	return res, s.filterData(req, &res)
 }
 
-func (s *ConverterService) FilterSearchRequest(req structure.FilterSearchRequest) (structure.BatchListFilterDataResponse, error) {
-	res := make(structure.BatchListFilterDataResponse)
-	return res, s.filterSearchRequest(req, &res)
+func (s *ConverterService) FilterSearchRequest(req structure.FilterSearchRequest) (*structure.FilterSearchResponse, error) {
+	res := new(structure.FilterSearchResponse)
+	return res, s.filterSearchRequest(req, res)
 }
 
 func (s *ConverterService) convertFind(req []structure.BatchConvertForFindServiceRequest, resPtr interface{}) error {
