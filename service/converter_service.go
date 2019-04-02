@@ -39,6 +39,11 @@ func (s *ConverterService) FilterData(req []structure.BatchFilterDataRequest) (s
 	return res, s.filterData(req, &res)
 }
 
+func (s *ConverterService) FilterSearchRequest(req []structure.BatchFilterDataRequest) (structure.BatchListFilterDataResponse, error) {
+	res := make(structure.BatchListFilterDataResponse)
+	return res, s.filterSearchRequest(req, &res)
+}
+
 func (s *ConverterService) convertFind(req []structure.BatchConvertForFindServiceRequest, resPtr interface{}) error {
 	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
@@ -84,6 +89,17 @@ func (s *ConverterService) convertErl(req []structure.BatchConvertErlRequest, re
 }
 
 func (s *ConverterService) filterData(req []structure.BatchFilterDataRequest, resPtr interface{}) error {
+	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
+		return c.Invoke(
+			modules.MdmDumperLinks.MdmConverterService.FilterBatchList,
+			s.callerId,
+			req,
+			resPtr,
+		)
+	})
+}
+
+func (s *ConverterService) filterSearchRequest(req []structure.BatchFilterDataRequest, resPtr interface{}) error {
 	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
 			modules.MdmDumperLinks.MdmConverterService.FilterBatchList,
