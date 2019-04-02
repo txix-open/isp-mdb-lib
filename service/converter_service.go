@@ -39,7 +39,7 @@ func (s *ConverterService) FilterData(req []structure.BatchFilterDataRequest) (s
 	return res, s.filterData(req, &res)
 }
 
-func (s *ConverterService) FilterSearchRequest(req []structure.BatchFilterDataRequest) (structure.BatchListFilterDataResponse, error) {
+func (s *ConverterService) FilterSearchRequest(req structure.FilterSearchRequest) (structure.BatchListFilterDataResponse, error) {
 	res := make(structure.BatchListFilterDataResponse)
 	return res, s.filterSearchRequest(req, &res)
 }
@@ -99,7 +99,7 @@ func (s *ConverterService) filterData(req []structure.BatchFilterDataRequest, re
 	})
 }
 
-func (s *ConverterService) filterSearchRequest(req []structure.BatchFilterDataRequest, resPtr interface{}) error {
+func (s *ConverterService) filterSearchRequest(req structure.FilterSearchRequest, resPtr interface{}) error {
 	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
 			modules.MdmDumperLinks.MdmConverterService.FilterBatchList,
