@@ -161,7 +161,7 @@ func (s *SearchService) convertGetPreferredSlicesCount(isTech bool, resPtr inter
 	})
 }
 
-func NewSeachService(client *backend.RxGrpcClient, method string, callerId int) SearchService {
+func NewSeachService(client *backend.RxGrpcClient, callerId int) SearchService {
 	return SearchService{
 		client:   client,
 		callerId: callerId,
