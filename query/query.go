@@ -17,6 +17,8 @@ const (
 	NotStartWith Operator = "not starts with"
 	EndWith      Operator = "ends with"
 	NotEndWith   Operator = "not ends with"
+	Exists       Operator = "exists"
+	NotExists    Operator = "not exists"
 
 	And LogicOperator = "AND"
 	Or  LogicOperator = "OR"
@@ -40,7 +42,7 @@ func (t Term) IsValid() bool {
 }
 
 type BinaryOperation struct {
-	Operator       Operator `schema:"Operation,[=,!=,<,>,<=,>=,contains,not contains, starts with, not starts with, ends with, not ends with]"`
+	Operator       Operator `schema:"Operation,[=,!=,<,>,<=,>=,contains,not contains, starts with, not starts with, ends with, not ends with, exists, not exists]"`
 	Value          string   `schema:"Logic operation"`
 	Field          string   `schema:"Field"`
 	SearchInCustom bool     `schema:"Search in custom data"`
@@ -48,7 +50,11 @@ type BinaryOperation struct {
 }
 
 func (bo BinaryOperation) IsValid() bool {
-	return bo.Field != "" && bo.Operator != "" && bo.Value != ""
+	ok := bo.Field != "" && bo.Operator != ""
+	if !ok {
+		return false
+	}
+	return bo.Value != "" || (bo.Operator == Exists || bo.Operator == NotExists)
 }
 
 type LogicOperation struct {
