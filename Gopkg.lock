@@ -55,9 +55,10 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:fb1ca4e31877d73535d6b7194a1bb903739758eafb9f0fb15a0ee44a67ec693d"
+  digest = "1:86c1d70691f8d8db0c8305fa7e8e175878bc41dfdc90c04504269c9c1b96ce23"
   name = "github.com/integration-system/isp-lib"
   packages = [
+    "atomic",
     "backend",
     "http",
     "logger",
@@ -309,6 +310,7 @@
     "github.com/integration-system/bellows",
     "github.com/integration-system/go-cmp/cmp",
     "github.com/integration-system/gowsdl/soap",
+    "github.com/integration-system/isp-lib/atomic",
     "github.com/integration-system/isp-lib/backend",
     "github.com/integration-system/isp-lib/modules",
     "github.com/json-iterator/go",

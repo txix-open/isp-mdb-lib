@@ -7,7 +7,8 @@ import (
 )
 
 type ConverterService struct {
-	client *backend.RxGrpcClient
+	client   *backend.RxGrpcClient
+	callerId int
 }
 
 func (s *ConverterService) ConvertToSudirFindEntry(req []structure.BatchConvertForFindServiceRequest) (
@@ -42,7 +43,7 @@ func (s *ConverterService) convertFind(req []structure.BatchConvertForFindServic
 	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
 			modules.MdmDumperLinks.MdmConverterService.ConvertToFindBatchList,
-			modules.MdmDumperModuleId,
+			s.callerId,
 			req,
 			resPtr,
 		)
@@ -53,7 +54,7 @@ func (s *ConverterService) convert(req []structure.BatchConvertDataRequest, resP
 	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
 			modules.MdmDumperLinks.MdmConverterService.ConvertToSudirBatchList,
-			modules.MdmDumperModuleId,
+			s.callerId,
 			req,
 			resPtr,
 		)
@@ -64,7 +65,7 @@ func (s *ConverterService) convertJson(req []structure.BatchConvertAnyRequest, r
 	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
 			modules.MdmDumperLinks.MdmConverterService.ConvertAnyBatchList,
-			modules.MdmDumperModuleId,
+			s.callerId,
 			req,
 			resPtr,
 		)
@@ -75,7 +76,7 @@ func (s *ConverterService) convertErl(req []structure.BatchConvertErlRequest, re
 	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
 			modules.MdmDumperLinks.MdmConverterService.ConvertErlBatchList,
-			modules.MdmDumperModuleId,
+			s.callerId,
 			req,
 			resPtr,
 		)
@@ -86,13 +87,16 @@ func (s *ConverterService) filterData(req []structure.BatchFilterDataRequest, re
 	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
 			modules.MdmDumperLinks.MdmConverterService.FilterBatchList,
-			modules.MdmDumperModuleId,
+			s.callerId,
 			req,
 			resPtr,
 		)
 	})
 }
 
-func NewConverterService(client *backend.RxGrpcClient) ConverterService {
-	return ConverterService{client: client}
+func NewConverterService(client *backend.RxGrpcClient, callerId int) ConverterService {
+	return ConverterService{
+		client:   client,
+		callerId: callerId,
+	}
 }
