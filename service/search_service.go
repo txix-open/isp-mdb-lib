@@ -15,29 +15,29 @@ type SearchService struct {
 	callerId int
 }
 
-func (s *SearchService) Search(req structure.SearchRequest) (structure.BatchListFilterDataResponse, error) {
-	res := make(structure.BatchListFilterDataResponse)
-	return res, s.convertSearch(req, &res)
+func (s *SearchService) Search(req structure.SearchRequest) (*structure.SearchResponse, error) {
+	res := new(structure.SearchResponse)
+	return res, s.convertSearch(req, res)
 }
 
-func (s *SearchService) SearchCount(req structure.CountRequest) (structure.BatchListFilterDataResponse, error) {
-	res := make(structure.BatchListFilterDataResponse)
-	return res, s.convertCount(req, &res)
+func (s *SearchService) SearchCount(req structure.CountRequest) (*structure.CountResponse, error) {
+	res := new(structure.CountResponse)
+	return res, s.convertCount(req, res)
 }
 
-func (s *SearchService) SearchIdList(req structure.SearchRequest) (structure.BatchListFilterDataResponse, error) {
-	res := make(structure.BatchListFilterDataResponse)
-	return res, s.convertSearchIdList(req, &res)
+func (s *SearchService) SearchIdList(req structure.SearchRequest) (*structure.SearchResponse, error) {
+	res := new(structure.SearchResponse)
+	return res, s.convertSearchIdList(req, res)
 }
 
-func (s *SearchService) SearchIdWithScroll(req structure.SearchWithScrollRequest) (structure.BatchListFilterDataResponse, error) {
-	res := make(structure.BatchListFilterDataResponse)
-	return res, s.convertSearchIdWithScroll(req, &res)
+func (s *SearchService) SearchIdWithScroll(req structure.SearchWithScrollRequest) (*structure.SearchIdWithScrollResponse, error) {
+	res := new(structure.SearchIdWithScrollResponse)
+	return res, s.convertSearchIdWithScroll(req, res)
 }
 
-func (s *SearchService) GetPreferredSlicesCount(isTech bool) (structure.BatchListFilterDataResponse, error) {
-	res := make(structure.BatchListFilterDataResponse)
-	return res, s.convertGetPreferredSlicesCount(isTech, &res)
+func (s *SearchService) GetPreferredSlicesCount(isTech bool) (*structure.PreferredSearchSlicesResponse, error) {
+	res := new(structure.PreferredSearchSlicesResponse)
+	return res, s.convertGetPreferredSlicesCount(isTech, res)
 }
 
 func (s *SearchService) ParallelSearchWithScrolls(
