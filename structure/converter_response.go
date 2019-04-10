@@ -118,6 +118,7 @@ const (
 	ReasonWrongValue
 	ReasonNotAccepted
 	ReasonEmptyCond
+	ReasonNoValue
 )
 
 type ConvertSearchError struct {
