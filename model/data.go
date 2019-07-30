@@ -114,16 +114,21 @@ func (rep *DataRepository) ConcurrentFetchFromTechRecords(batchSize int, f func(
 
 func concurrentFetchData(tableName string, batchSize int, f func(list []entity.DataRecord) bool) func(db *pg.DB) error {
 	return func(db *pg.DB) error {
-		lastId := 0
-		_, err := db.Query(&lastId, fmt.Sprintf("SELECT max(id) FROM %s.%s", schema, tableName))
+		idSection := struct {
+			LastId  int `sql:"max"`
+			FirstId int `sql:"min"`
+		}{LastId: 0, FirstId: 0}
+
+		_, err := db.Query(&idSection, fmt.Sprintf("SELECT Min(id), Max(id) FROM %s.%s", schema, tableName))
 		if err != nil {
 			return err
 		}
-		if lastId == 0 {
+		if idSection.LastId == 0 {
 			return nil
 		}
 
-		queriesCount := int(math.Ceil(float64(lastId) / float64(batchSize)))
+		shiftId := idSection.FirstId / batchSize
+		queriesCount := int(math.Ceil(float64(idSection.LastId-idSection.FirstId) / float64(batchSize)))
 		currentQuery := atomic.NewAtomicInt(0)
 		fetching := atomic.NewAtomicBool(true)
 		goroutinesCount := runtime.NumCPU() * runtime.NumCPU()
@@ -143,7 +148,7 @@ func concurrentFetchData(tableName string, batchSize int, f func(list []entity.D
 					}
 
 					var list []entity.DataRecord
-					currentId := (qNum - 1) * batchSize
+					currentId := (qNum + shiftId - 1) * batchSize
 					q := fmt.Sprintf("SELECT * FROM %s.%s WHERE id > ? AND id <= ? ORDER BY id LIMIT ?", schema, tableName)
 					//timer := service.Metrics().StartFetchBatchTimer()
 					_, err := db.Query(&list, q, currentId, currentId+batchSize, batchSize)
