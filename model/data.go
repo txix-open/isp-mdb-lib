@@ -61,6 +61,34 @@ func (rep *DataRepository) CountTechRecords() (int, error) {
 	return value, err
 }
 
+func (rep *DataRepository) GetMaxVersionFromRecords() (int, error) {
+	max := 0
+	if err := rep.DB.Visit(func(db *pg.DB) error {
+		_, err := db.Query(&max, fmt.Sprintf("SELECT  max(version)  FROM %s.%s", schema, entity.RecordsTableName))
+		return err
+	}); err != nil {
+		if err == pg.ErrNoRows {
+			return 0, nil
+		}
+		return 0, err
+	}
+	return max, nil
+}
+
+func (rep *DataRepository) GetMaxVersionFromTechRecords() (int, error) {
+	max := 0
+	if err := rep.DB.Visit(func(db *pg.DB) error {
+		_, err := db.Query(&max, fmt.Sprintf("SELECT  max(version)  FROM %s.%s", schema, entity.TechRecordsTableName))
+		return err
+	}); err != nil {
+		if err == pg.ErrNoRows {
+			return 0, nil
+		}
+		return 0, err
+	}
+	return max, nil
+}
+
 func (rep *DataRepository) UnloadRecordById(listId []string, techRecord bool) ([]entity.DataRecord, error) {
 	response := make([]entity.DataRecord, 0)
 	err := rep.DB.Visit(func(db *pg.DB) error {
