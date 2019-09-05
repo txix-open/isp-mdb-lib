@@ -25,8 +25,8 @@ const (
 )
 
 type Term struct {
-	LogicOperation  *LogicOperation  `schema:"Logic operation"`
-	BinaryOperation *BinaryOperation `schema:"Binary operation"`
+	LogicOperation  *LogicOperation  `schema:"Логическая операция"`
+	BinaryOperation *BinaryOperation `schema:"Бинарная операция"`
 }
 
 func (t Term) IsLogic() bool {
@@ -42,11 +42,11 @@ func (t Term) IsValid() bool {
 }
 
 type BinaryOperation struct {
-	Operator       Operator `schema:"Operation,[=,!=,<,>,<=,>=,contains,not contains, starts with, not starts with, ends with, not ends with, exists, not exists]"`
-	Value          string   `schema:"Logic operation"`
-	Field          string   `schema:"Field"`
-	SearchInCustom bool     `schema:"Search in custom data"`
-	IsPrimaryKey   bool     `schema:"Is primary key"`
+	Operator       Operator `schema:"Оператор,[=,!=,<,>,<=,>=,contains,not contains, starts with, not starts with, ends with, not ends with, exists, not exists]"`
+	Value          string   `schema:"Ожидаемое значение"`
+	Field          string   `schema:"Операнд,название поля к которому применяется оператор"`
+	SearchInCustom bool     `schema:"Поиск по расширенным данным,если используется поле из массива атрибутов ('documents.100016.ref_num'), то должно быть значение 'true'"`
+	IsPrimaryKey   bool     `schema:"Первичны ключ,если поле является первичным ключом для профиля, то рекомендуется значение true, для оптимизации поиска"`
 }
 
 func (bo BinaryOperation) IsValid() bool {
@@ -58,8 +58,8 @@ func (bo BinaryOperation) IsValid() bool {
 }
 
 type LogicOperation struct {
-	LogicOperator LogicOperator `schema:"Operator,['AND', 'OR']"`
-	Terms         []Term        `schema:"Terms"`
+	LogicOperator LogicOperator `schema:"Логический оператор,['AND', 'OR']"`
+	Terms         []Term        `schema:"Список условий"`
 }
 
 func (lo LogicOperation) IsValid() bool {
