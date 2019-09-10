@@ -7,18 +7,26 @@ type Amqp struct {
 	ExchangeKind string `schema:"Тип точки маршрутизации,'direct', 'topic', 'fanout' (по умолчанию - 'direct')"`
 	QueueName    string `schema:"Название очереди"`
 	RoutingKey   string `valid:"required~Required" schema:"Ключ маршрутизации,для публикации напрямую в очередь, указывается название очереди"`
-	Declare      bool   `schema:"Автоматическое объявление очереди,точки маршрутизации,привязки"`
+	// автоматическое объявление очереди,точки маршрутизации,привязк
+	Declare bool `schema:"Автоматическое объявление очереди,точки маршрутизации,привязки"`
 }
 
 type AsyncSearchRequest struct {
+	// размер пакета с результатами поиска
 	PackageSize int
+	// поиск по техническим записям
 	TechEntries bool
-	Callback    string
-	Protocol    ProtocolVersion
-	Amqp        *Amqp
+	// если поле не заданно используется внутренее хранилище результатов поиска
+	// Поддерживается rabbit (начинается с amqp://) и http (c http:// или https://)
+	// amqp://user:pass@host:10000/vhost
+	Callback string
+	Protocol ProtocolVersion
+	// обязательный параметр, если указан callback RabbitMQ
+	Amqp *Amqp
 }
 
 type ExternalAsyncSearchRequest struct {
+	//название атрибута -> значение, все элементы объекта объединяются логическим 'И'
 	Query map[string]interface{} `valid:"required~Required"`
 	AsyncSearchRequest
 }
