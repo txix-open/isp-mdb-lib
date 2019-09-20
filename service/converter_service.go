@@ -6,6 +6,10 @@ import (
 	"github.com/integration-system/isp-mdb-lib/structure"
 )
 
+const (
+	convertAnySearchMethod = "mdm-converter/any/convert_search_request"
+)
+
 type ConverterService struct {
 	client   *backend.RxGrpcClient
 	callerId int
@@ -39,9 +43,17 @@ func (s *ConverterService) FilterData(req []structure.BatchFilterDataRequest) (s
 	return res, s.filterData(req, &res)
 }
 
-func (s *ConverterService) FilterSearchRequest(req structure.FilterSearchRequest) (*structure.FilterSearchResponse, error) {
-	res := new(structure.FilterSearchResponse)
+func (s *ConverterService) FilterSearchRequest(req structure.FilterSearchRequest) (*structure.ConvertAnySearchResponse, error) {
+	res := new(structure.ConvertAnySearchResponse)
 	return res, s.filterSearchRequest(req, res)
+}
+
+func (s *ConverterService) ConvertAnySearchRequest(req structure.ConvertAnySearchRequest) (*structure.ConvertAnySearchResponse, error) {
+	res := new(structure.ConvertAnySearchResponse)
+	err := s.client.Visit(func(c *backend.InternalGrpcClient) error {
+		return c.Invoke(convertAnySearchMethod, s.callerId, req, res)
+	})
+	return res, err
 }
 
 func (s *ConverterService) convertFind(req []structure.BatchConvertForFindServiceRequest, resPtr interface{}) error {

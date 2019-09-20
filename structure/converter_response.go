@@ -135,7 +135,7 @@ type ConvertSearchResponse struct {
 	Error     *ConvertSearchError
 }
 
-type FilterSearchResponse struct {
+type ConvertAnySearchResponse struct {
 	Condition         *query.Term
 	UnavailableFields []string
 }
