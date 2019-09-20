@@ -8,9 +8,9 @@ type OneOfCondition struct {
 }
 
 type BinaryCondition struct {
-	Field    string              `valid:"required~Required"`                                                                                                                //путь до атрибута
-	Operator query.LogicOperator `valid:"required~Required,in(=|!=|<|>|<=|>=|contains|not contains|starts with|not starts with|ends with|not ends with|exists|not exists)"` //условный оператор
-	Value    string              //значение атрибута, обязательно для всех операторов, кроме (exists, not exists)
+	Field    string         `valid:"required~Required"`                                                                                                                //путь до атрибута
+	Operator query.Operator `valid:"required~Required,in(=|!=|<|>|<=|>=|contains|not contains|starts with|not starts with|ends with|not ends with|exists|not exists)"` //условный оператор
+	Value    string         //значение атрибута, обязательно для всех операторов, кроме (exists, not exists)
 }
 
 type LogicCondition struct {
