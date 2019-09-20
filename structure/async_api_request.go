@@ -31,6 +31,11 @@ type ExternalAsyncSearchRequest struct {
 	AsyncSearchRequest
 }
 
+type ExternalExtendedAsyncSearchRequest struct {
+	Query *OneOfCondition `valid:"required~Required"`
+	AsyncSearchRequest
+}
+
 type InternalAsyncSearchRequest struct {
 	Query         query.Term
 	ApplicationId int32 `valid:"required~Required"`

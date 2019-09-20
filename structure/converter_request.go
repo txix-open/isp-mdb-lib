@@ -111,5 +111,5 @@ type FilterSearchRequest struct {
 type ConvertAnySearchRequest struct {
 	Condition     *OneOfCondition `valid:"required~Required"`
 	ApplicationId int32           `valid:"required~Required"`
-	Protocol      ProtocolVersion `valid:"required~Required"`
+	Protocol      ProtocolVersion
 }
