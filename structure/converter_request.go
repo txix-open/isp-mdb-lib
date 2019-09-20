@@ -105,5 +105,11 @@ type FilterAttributeRequest struct {
 
 type FilterSearchRequest struct {
 	Query         map[string]interface{}
-	ApplicationId int32
+	ApplicationId int32 `valid:"required~Required"`
+}
+
+type ConvertProtocolSearchRequest struct {
+	Condition     *OneOfCondition `valid:"required~Required"`
+	ApplicationId int32           `valid:"required~Required"`
+	Protocol      ProtocolVersion `valid:"required~Required"`
 }
