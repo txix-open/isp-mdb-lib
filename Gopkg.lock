@@ -72,7 +72,7 @@
   revision = "368713356c71961354e09ab9b734740ebdd94784"
 
 [[projects]]
-  digest = "1:d587af00339b86ee2ecb17c8d7ef124de827b9a60a6e2492638a1fed19bbd6d7"
+  digest = "1:f81f47133b6e2a5940590719ca66433c206d4c08dcae5c61a070efc0bf3862db"
   name = "github.com/integration-system/isp-lib"
   packages = [
     "atomic",
@@ -86,8 +86,8 @@
     "utils",
   ]
   pruneopts = "UT"
-  revision = "5640d3f7cf4e57740b54324cf7ebfe4cab2a598f"
-  version = "v1.1.1"
+  revision = "b110f4b47bc34145bda99c67560a780013d12f55"
+  version = "v1.6.3"
 
 [[projects]]
   branch = "master"
