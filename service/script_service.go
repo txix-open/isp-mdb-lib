@@ -15,8 +15,9 @@ type ScriptService struct {
 	callerId int
 }
 
-func (s *ScriptService) ExecuteById(req structure.ExecuteByIdRequest) (*structure.ScriptResponse, error) {
+func (s *ScriptService) ExecuteById(req structure.ExecuteByIdRequest, responseResPtr interface{}) (*structure.ScriptResponse, error) {
 	res := new(structure.ScriptResponse)
+	res.Result = responseResPtr
 	err := s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
 			ScriptServiceExecuteByIdAddr,
@@ -28,8 +29,9 @@ func (s *ScriptService) ExecuteById(req structure.ExecuteByIdRequest) (*structur
 	return res, err
 }
 
-func (s *ScriptService) Execute(req structure.ExecuteRequest) (*structure.ScriptResponse, error) {
+func (s *ScriptService) Execute(req structure.ExecuteRequest, responseResPtr interface{}) (*structure.ScriptResponse, error) {
 	res := new(structure.ScriptResponse)
+	res.Result = responseResPtr
 	err := s.client.Visit(func(c *backend.InternalGrpcClient) error {
 		return c.Invoke(
 			ScriptServiceExecuteAddr,
