@@ -1,5 +1,7 @@
 package structure
 
+import "fmt"
+
 type ExecuteByIdRequest struct {
 	Id  string `valid:"required~Required"`
 	Arg interface{}
@@ -23,4 +25,8 @@ type ScriptResponse struct {
 type ScriptResponseError struct {
 	Type        string
 	Description string
+}
+
+func (err ScriptResponseError) Error() string {
+	return fmt.Sprintf("%s: %s", err.Type, err.Description)
 }
