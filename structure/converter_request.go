@@ -15,8 +15,8 @@ type AbstractConvertBatchRequest struct {
 }
 
 type ConvertRequestPayload struct {
-	Data                  map[string]interface{} `valid:"required~Required"`
-	CustomData            map[string]interface{}
+	Data                  interface{} `valid:"required~Required"`
+	CustomData            interface{}
 	AttachedObjectTypes   []string
 	FilterByAttachedTypes bool
 }
@@ -33,8 +33,8 @@ type BatchConvertDataRequest struct {
 }
 
 type Record struct {
-	Data       map[string]interface{} `valid:"required~Required"`
-	CustomData map[string]interface{}
+	Data       interface{} `valid:"required~Required"`
+	CustomData interface{}
 }
 
 type ConvertForFindServiceRequestPayload struct {

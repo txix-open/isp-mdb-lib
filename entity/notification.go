@@ -1,15 +1,26 @@
 package entity
 
 import (
+	"encoding/json"
 	"github.com/integration-system/isp-mdb-lib/diff"
 )
 
-type Notification struct {
+type BaseNotification struct {
 	ExternalId  string
 	OperationId string
 	Version     int64
 	IsTech      bool
-	Data        map[string]interface{}
-	CustomData  map[string]interface{}
 	Delta       diff.Delta
+}
+
+type Notification struct {
+	*BaseNotification
+	Data       map[string]interface{}
+	CustomData map[string]interface{}
+}
+
+type TransitNotification struct {
+	*BaseNotification
+	Data       json.RawMessage
+	CustomData json.RawMessage
 }

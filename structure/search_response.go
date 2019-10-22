@@ -3,7 +3,7 @@ package structure
 import "github.com/integration-system/isp-mdb-lib/entity"
 
 type SearchResponse struct {
-	Items      []entity.DataRecord
+	Items      []entity.TransitRecord
 	TotalCount int64
 }
 

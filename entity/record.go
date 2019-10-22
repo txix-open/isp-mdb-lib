@@ -1,6 +1,7 @@
 package entity
 
 import (
+	"encoding/json"
 	"time"
 )
 
@@ -9,14 +10,24 @@ const (
 	TechRecordsTableName = "data_tech_records"
 )
 
-type DataRecord struct {
-	TableName string `sql:"?db_schema.data_records" json:"-"`
+type BaseRecord struct {
+	Id         int64
+	ExternalId string `valid:"required~Required"`
+	Version    int64  `valid:"required~Required"`
+	UpdatedAt  time.Time
+	CreatedAt  time.Time
+}
 
-	Id         int64                  `json:"id"`
-	ExternalId string                 `valid:"required~Required" json:"externalId"`
-	Data       map[string]interface{} `valid:"required~Required" json:"data"`
-	CustomData map[string]interface{} `json:"customData"`
-	Version    int64                  `valid:"required~Required" json:"version"`
-	UpdatedAt  time.Time              `json:"updatedAt"`
-	CreatedAt  time.Time              `json:"createdAt"`
+type DataRecord struct {
+	tableName string `sql:"?db_schema.data_records" json:"-"`
+	*BaseRecord
+	Data       map[string]interface{} `valid:"required~Required"`
+	CustomData map[string]interface{}
+}
+
+type TransitRecord struct {
+	tableName string `sql:"?db_schema.data_records" json:"-"`
+	*BaseRecord
+	Data       json.RawMessage `valid:"required~Required"`
+	CustomData json.RawMessage
 }
