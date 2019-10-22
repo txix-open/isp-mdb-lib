@@ -21,6 +21,12 @@ type ConvertRequestPayload struct {
 	FilterByAttachedTypes bool
 }
 
+func (p ConvertRequestPayload) CastToMaps() (map[string]interface{}, map[string]interface{}) {
+	data, _ := p.Data.(map[string]interface{})
+	customData, _ := p.CustomData.(map[string]interface{})
+	return data, customData
+}
+
 type ConvertDataRequest struct {
 	*ConvertRequestPayload `valid:"required~Required"`
 	ApplicationId          int32 `valid:"required~Required"`
@@ -35,6 +41,12 @@ type BatchConvertDataRequest struct {
 type Record struct {
 	Data       interface{} `valid:"required~Required"`
 	CustomData interface{}
+}
+
+func (r Record) CastToMaps() (map[string]interface{}, map[string]interface{}) {
+	data, _ := r.Data.(map[string]interface{})
+	customData, _ := r.CustomData.(map[string]interface{})
+	return data, customData
 }
 
 type ConvertForFindServiceRequestPayload struct {
