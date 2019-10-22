@@ -25,7 +25,7 @@ type DataRecord struct {
 	CustomData map[string]interface{}
 }
 
-type TransitRecord struct {
+type TransitDataRecord struct {
 	tableName string `sql:"?db_schema.data_records" json:"-"`
 	*BaseRecord
 	Data       json.RawMessage `valid:"required~Required"`
