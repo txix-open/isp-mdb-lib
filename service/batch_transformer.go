@@ -12,14 +12,14 @@ var (
 	unknownError = errors.New("results for specified system identity not found int response")
 )
 
-type convertFunc func(list []entity.DataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error)
+type convertFunc func(list []entity.TransitDataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error)
 
 type BatchTransformer struct {
 	service    ConverterService
 	converters map[structure.ProtocolVersion]convertFunc
 }
 
-func (t BatchTransformer) ConvertBatch(protocol structure.ProtocolVersion, list []entity.DataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
+func (t BatchTransformer) ConvertBatch(protocol structure.ProtocolVersion, list []entity.TransitDataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
 	if convert, ok := t.converters[protocol]; ok {
 		return convert(list, identity, techRecord)
 	} else {
@@ -27,7 +27,7 @@ func (t BatchTransformer) ConvertBatch(protocol structure.ProtocolVersion, list 
 	}
 }
 
-func (t BatchTransformer) FilterDataBatch(list []entity.DataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
+func (t BatchTransformer) FilterDataBatch(list []entity.TransitDataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
 	request := make([]structure.BatchFilterDataRequest, len(list))
 	for i, record := range list {
 		request[i] = structure.BatchFilterDataRequest{
@@ -56,7 +56,7 @@ func NewBatchTransformer(service ConverterService) BatchTransformer {
 	return bt
 }
 
-func convertSudir(service ConverterService, protocol structure.ProtocolVersion, list []entity.DataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
+func convertSudir(service ConverterService, protocol structure.ProtocolVersion, list []entity.TransitDataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
 	request := make([]structure.BatchConvertDataRequest, len(list))
 	for i, record := range list {
 		request[i] = structure.BatchConvertDataRequest{
@@ -78,7 +78,7 @@ func convertSudir(service ConverterService, protocol structure.ProtocolVersion, 
 	return castResultArray(response[identity])
 }
 
-func convertSudirFind(service ConverterService, protocol structure.ProtocolVersion, list []entity.DataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
+func convertSudirFind(service ConverterService, protocol structure.ProtocolVersion, list []entity.TransitDataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
 	request := make([]structure.BatchConvertForFindServiceRequest, len(list))
 	for i, record := range list {
 		request[i] = structure.BatchConvertForFindServiceRequest{
@@ -98,7 +98,7 @@ func convertSudirFind(service ConverterService, protocol structure.ProtocolVersi
 	return castResultArray(response[identity])
 }
 
-func convertErl(service ConverterService, list []entity.DataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
+func convertErl(service ConverterService, list []entity.TransitDataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
 	request := make([]structure.BatchConvertErlRequest, len(list))
 	for i, record := range list {
 		request[i] = structure.BatchConvertErlRequest{
@@ -115,7 +115,7 @@ func convertErl(service ConverterService, list []entity.DataRecord, identity int
 	return castResultArray(response[identity])
 }
 
-func convertAny(service ConverterService, protocol structure.ProtocolVersion, list []entity.DataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
+func convertAny(service ConverterService, protocol structure.ProtocolVersion, list []entity.TransitDataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
 	request := make([]structure.BatchConvertAnyRequest, len(list))
 	for i, record := range list {
 		request[i] = structure.BatchConvertAnyRequest{
@@ -133,24 +133,24 @@ func convertAny(service ConverterService, protocol structure.ProtocolVersion, li
 }
 
 func makeErlConverter(service ConverterService) convertFunc {
-	return func(list []entity.DataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
+	return func(list []entity.TransitDataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
 		return convertErl(service, list, identity, techRecord)
 	}
 }
 
 func makeSudirConverter(service ConverterService, protocol structure.ProtocolVersion) convertFunc {
-	return func(list []entity.DataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
+	return func(list []entity.TransitDataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
 		return convertSudir(service, protocol, list, identity, techRecord)
 	}
 }
 
 func makeSudirFindConverter(service ConverterService, protocol structure.ProtocolVersion) convertFunc {
-	return func(list []entity.DataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
+	return func(list []entity.TransitDataRecord, identity int32, techRecord bool) ([]structure.ConvertResponse, error) {
 		return convertSudirFind(service, protocol, list, identity, techRecord)
 	}
 }
 
-func makeAbstractRequest(protocol structure.ProtocolVersion, record entity.DataRecord, identity int32, techRecord bool) *structure.AbstractConvertBatchRequest {
+func makeAbstractRequest(protocol structure.ProtocolVersion, record entity.TransitDataRecord, identity int32, techRecord bool) *structure.AbstractConvertBatchRequest {
 	return &structure.AbstractConvertBatchRequest{
 		AppIdList:  []int32{identity},
 		Id:         uint64(record.Id),
