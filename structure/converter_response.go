@@ -31,8 +31,13 @@ type BatchConvertResponse interface {
 }
 
 type AbstractConvertResult struct {
-	Target NotificationTarget
-	Error  *ConvertError
+	Target     NotificationTarget
+	Error      *ConvertError
+	ExternalId string
+	Id         uint64
+	Version    int64
+	Protocol   ProtocolVersion
+	IsTech     bool
 }
 
 type SudirConvertResult struct {
