@@ -5,13 +5,18 @@ import (
 	"github.com/integration-system/isp-mdb-lib/stubsV2/findV2"
 )
 
+type NotificationTarget struct {
+	AppId    int32
+	Notifier string
+}
+
 type AbstractConvertBatchRequest struct {
 	ExternalId string
 	Id         uint64
 	Version    int64
 	Protocol   ProtocolVersion
 	IsTech     bool
-	AppIdList  []int32 `valid:"required~Required"`
+	AppIdList  []NotificationTarget `valid:"required~Required"`
 }
 
 type ConvertRequestPayload struct {
