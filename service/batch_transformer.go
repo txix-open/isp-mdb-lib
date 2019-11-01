@@ -152,7 +152,7 @@ func makeSudirFindConverter(service ConverterService, protocol structure.Protoco
 
 func makeAbstractRequest(protocol structure.ProtocolVersion, record entity.TransitDataRecord, identity int32, techRecord bool) *structure.AbstractConvertBatchRequest {
 	return &structure.AbstractConvertBatchRequest{
-		AppIdList:  []int32{identity},
+		AppIdList:  []structure.NotificationTarget{{AppId: identity}},
 		Id:         uint64(record.Id),
 		ExternalId: record.ExternalId,
 		Version:    record.Version,
