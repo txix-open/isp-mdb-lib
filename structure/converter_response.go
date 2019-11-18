@@ -130,7 +130,7 @@ func (r BatchListConvertForFindResponse) GetResult() []ConvertResponse {
 type BatchConvertAnyResponse map[int32]*AnyConvertResult
 type BatchListConvertAnyResponse map[int32][]AnyConvertResult
 
-func (r BatchListConvertAnyResponse) GetResult(appId int32) []ConvertResponse {
+func (r BatchListConvertAnyResponse) GetResult() []ConvertResponse {
 	result := make([]ConvertResponse, 0, len(r)*2)
 	for _, arr := range r {
 		for _, resp := range arr {
@@ -143,7 +143,7 @@ func (r BatchListConvertAnyResponse) GetResult(appId int32) []ConvertResponse {
 type BatchConvertErlResponse map[int32]*ErlConvertResult
 type BatchListConvertErlResponse map[int32][]ErlConvertResult
 
-func (r BatchListConvertErlResponse) GetResult(appId int32) []ConvertResponse {
+func (r BatchListConvertErlResponse) GetResult() []ConvertResponse {
 	result := make([]ConvertResponse, 0, len(r)*2)
 	for _, arr := range r {
 		for _, resp := range arr {
@@ -156,7 +156,7 @@ func (r BatchListConvertErlResponse) GetResult(appId int32) []ConvertResponse {
 type BatchFilterDataResponse map[int32]*FilterDataResult
 type BatchListFilterDataResponse map[int32][]FilterDataResult
 
-func (r BatchListFilterDataResponse) GetResult(appId int32) []ConvertResponse {
+func (r BatchListFilterDataResponse) GetResult() []ConvertResponse {
 	result := make([]ConvertResponse, 0, len(r)*2)
 	for _, arr := range r {
 		for _, resp := range arr {
