@@ -8,10 +8,6 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-var (
-	emptyList = make([]ConvertResponse, 0)
-)
-
 type ConvertError struct {
 	Code  codes.Code
 	Error string
@@ -27,7 +23,7 @@ type ConvertResponse interface {
 }
 
 type BatchConvertResponse interface {
-	GetResult(appId int32) []ConvertResponse
+	GetResult() []ConvertResponse
 }
 
 type AbstractConvertResult struct {
@@ -108,76 +104,66 @@ func (r FilterDataResult) GetResult() interface{} {
 type BatchConvertForSudirResponse map[int32]*SudirConvertResult
 type BatchListConvertForSudirResponse map[int32][]SudirConvertResult
 
-func (r BatchListConvertForSudirResponse) GetResult(appId int32) []ConvertResponse {
-	if arr, ok := r[appId]; ok {
-		res := make([]ConvertResponse, len(arr))
-		for i, v := range arr {
-			res[i] = v
+func (r BatchListConvertForSudirResponse) GetResult() []ConvertResponse {
+	result := make([]ConvertResponse, 0, len(r)*2)
+	for _, arr := range r {
+		for _, resp := range arr {
+			result = append(result, resp)
 		}
-		return res
-	} else {
-		return emptyList
 	}
+	return result
 }
 
 type BatchConvertForFindResponse map[int32]*FindConvertResult
 type BatchListConvertForFindResponse map[int32][]FindConvertResult
 
-func (r BatchListConvertForFindResponse) GetResult(appId int32) []ConvertResponse {
-	if arr, ok := r[appId]; ok {
-		res := make([]ConvertResponse, len(arr))
-		for i, v := range arr {
-			res[i] = v
+func (r BatchListConvertForFindResponse) GetResult() []ConvertResponse {
+	result := make([]ConvertResponse, 0, len(r)*2)
+	for _, arr := range r {
+		for _, resp := range arr {
+			result = append(result, resp)
 		}
-		return res
-	} else {
-		return emptyList
 	}
+	return result
 }
 
 type BatchConvertAnyResponse map[int32]*AnyConvertResult
 type BatchListConvertAnyResponse map[int32][]AnyConvertResult
 
 func (r BatchListConvertAnyResponse) GetResult(appId int32) []ConvertResponse {
-	if arr, ok := r[appId]; ok {
-		res := make([]ConvertResponse, len(arr))
-		for i, v := range arr {
-			res[i] = v
+	result := make([]ConvertResponse, 0, len(r)*2)
+	for _, arr := range r {
+		for _, resp := range arr {
+			result = append(result, resp)
 		}
-		return res
-	} else {
-		return emptyList
 	}
+	return result
 }
 
 type BatchConvertErlResponse map[int32]*ErlConvertResult
 type BatchListConvertErlResponse map[int32][]ErlConvertResult
 
 func (r BatchListConvertErlResponse) GetResult(appId int32) []ConvertResponse {
-	if arr, ok := r[appId]; ok {
-		res := make([]ConvertResponse, len(arr))
-		for i, v := range arr {
-			res[i] = v
+	result := make([]ConvertResponse, 0, len(r)*2)
+	for _, arr := range r {
+		for _, resp := range arr {
+			result = append(result, resp)
 		}
-		return res
-	} else {
-		return emptyList
 	}
+	return result
 }
 
 type BatchFilterDataResponse map[int32]*FilterDataResult
 type BatchListFilterDataResponse map[int32][]FilterDataResult
 
 func (r BatchListFilterDataResponse) GetResult(appId int32) []ConvertResponse {
-	if arr, ok := r[appId]; ok {
-		res := make([]ConvertResponse, len(arr))
-		for i, v := range arr {
-			res[i] = v
+	result := make([]ConvertResponse, 0, len(r)*2)
+	for _, arr := range r {
+		for _, resp := range arr {
+			result = append(result, resp)
 		}
-		return res
-	} else {
-		return emptyList
 	}
+	return result
 }
 
 type Reason int
