@@ -89,12 +89,12 @@ func (rep *DataRepository) GetMaxVersionFromTechRecords() (int, error) {
 	return max, nil
 }
 
-func (rep *DataRepository) UnloadRecordById(listId []string, techRecord bool) ([]entity.DataRecord, error) {
-	response := make([]entity.DataRecord, 0)
+func (rep *DataRepository) GetRecordsByIdList(listId []string, techRecord bool) ([]entity.TransitDataRecord, error) {
+	response := make([]entity.TransitDataRecord, 0)
 	err := rep.DB.Visit(func(db *pg.DB) error {
 		var res interface{}
-		rec := make([]entity.DataRecord, 0)
-		trec := make([]entity.DataTechRecord, 0)
+		rec := make([]entity.TransitDataRecord, 0)
+		trec := make([]entity.TransitDataTechRecord, 0)
 		if techRecord {
 			res = &trec
 		} else {
@@ -107,7 +107,7 @@ func (rep *DataRepository) UnloadRecordById(listId []string, techRecord bool) ([
 
 		if techRecord {
 			for _, value := range trec {
-				response = append(response, *value.DataRecord)
+				response = append(response, *value.TransitDataRecord)
 			}
 		} else {
 			response = rec
@@ -120,27 +120,27 @@ func (rep *DataRepository) UnloadRecordById(listId []string, techRecord bool) ([
 	return response, nil
 }
 
-func (rep *DataRepository) UseRecordsCursor(batchSize int, f func(list []entity.DataRecord) bool) error {
+func (rep *DataRepository) UseRecordsCursor(batchSize int, f func(list []entity.TransitDataRecord) bool) error {
 	return rep.DB.Visit(func(db *pg.DB) error {
 		return db.RunInTransaction(fetchDataWithCursor(entity.RecordsTableName, batchSize, f))
 	})
 }
 
-func (rep *DataRepository) UseTechRecordsCursor(batchSize int, f func(list []entity.DataRecord) bool) error {
+func (rep *DataRepository) UseTechRecordsCursor(batchSize int, f func(list []entity.TransitDataRecord) bool) error {
 	return rep.DB.Visit(func(db *pg.DB) error {
 		return db.RunInTransaction(fetchDataWithCursor(entity.TechRecordsTableName, batchSize, f))
 	})
 }
 
-func (rep *DataRepository) ConcurrentFetchFromRecords(batchSize int, f func(list []entity.DataRecord) bool) error {
+func (rep *DataRepository) ConcurrentFetchFromRecords(batchSize int, f func(list []entity.TransitDataRecord) bool) error {
 	return rep.DB.Visit(concurrentFetchData(entity.RecordsTableName, batchSize, f))
 }
 
-func (rep *DataRepository) ConcurrentFetchFromTechRecords(batchSize int, f func(list []entity.DataRecord) bool) error {
+func (rep *DataRepository) ConcurrentFetchFromTechRecords(batchSize int, f func(list []entity.TransitDataRecord) bool) error {
 	return rep.DB.Visit(concurrentFetchData(entity.TechRecordsTableName, batchSize, f))
 }
 
-func concurrentFetchData(tableName string, batchSize int, f func(list []entity.DataRecord) bool) func(db *pg.DB) error {
+func concurrentFetchData(tableName string, batchSize int, f func(list []entity.TransitDataRecord) bool) func(db *pg.DB) error {
 	return func(db *pg.DB) error {
 		idSection := struct {
 			LastId  int `sql:"max"`
@@ -175,7 +175,7 @@ func concurrentFetchData(tableName string, batchSize int, f func(list []entity.D
 						return
 					}
 
-					var list []entity.DataRecord
+					var list []entity.TransitDataRecord
 					currentId := (qNum + shiftId - 1) * batchSize
 					q := fmt.Sprintf("SELECT * FROM %s.%s WHERE id > ? AND id <= ? ORDER BY id LIMIT ?", schema, tableName)
 					//timer := service.Metrics().StartFetchBatchTimer()
@@ -212,7 +212,7 @@ func concurrentFetchData(tableName string, batchSize int, f func(list []entity.D
 	}
 }
 
-func fetchDataWithCursor(table string, batchSize int, f func(list []entity.DataRecord) bool) func(tx *pg.Tx) error {
+func fetchDataWithCursor(table string, batchSize int, f func(list []entity.TransitDataRecord) bool) func(tx *pg.Tx) error {
 	return func(tx *pg.Tx) error {
 		_, err := tx.Exec(fmt.Sprintf("DECLARE %s CURSOR FOR SELECT * FROM %s.%s", cursorName, schema, table))
 		if err != nil {
@@ -220,7 +220,7 @@ func fetchDataWithCursor(table string, batchSize int, f func(list []entity.DataR
 		}
 
 		for {
-			var list []entity.DataRecord
+			var list []entity.TransitDataRecord
 			_, err := tx.Query(&list, fmt.Sprintf("FETCH %d FROM %s", batchSize, cursorName))
 			if err != nil {
 				return err
