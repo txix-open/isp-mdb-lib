@@ -157,6 +157,9 @@ func concurrentFetchData(tableName string, batchSize int, f func(list []entity.T
 
 		shiftId := idSection.FirstId / batchSize
 		queriesCount := int(math.Ceil(float64(idSection.LastId-idSection.FirstId) / float64(batchSize)))
+		if queriesCount == 0 {
+			queriesCount = 1
+		}
 		currentQuery := atomic.NewAtomicInt(0)
 		fetching := atomic.NewAtomicBool(true)
 		goroutinesCount := runtime.NumCPU() * runtime.NumCPU()
