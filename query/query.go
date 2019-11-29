@@ -42,11 +42,12 @@ func (t Term) IsValid() bool {
 }
 
 type BinaryOperation struct {
-	Operator       Operator `schema:"Оператор,[=,!=,<,>,<=,>=,contains,not contains, starts with, not starts with, ends with, not ends with, exists, not exists]"`
-	Value          string   `schema:"Ожидаемое значение"`
-	Field          string   `schema:"Операнд,название поля к которому применяется оператор"`
-	SearchInCustom bool     `schema:"Поиск по расширенным данным,если используется поле из массива атрибутов ('documents.100016.ref_num'), то должно быть значение 'true'"`
-	IsPrimaryKey   bool     `schema:"Первичны ключ,если поле является первичным ключом для профиля, то рекомендуется значение true, для оптимизации поиска"`
+	Operator        Operator `schema:"Оператор,[=,!=,<,>,<=,>=,contains,not contains, starts with, not starts with, ends with, not ends with, exists, not exists]"`
+	Value           string   `schema:"Ожидаемое значение"`
+	Field           string   `schema:"Операнд,название поля к которому применяется оператор"`
+	MappingSrcField string   `schema:"Исходное название поля маппинга"`
+	SearchInCustom  bool     `schema:"Поиск по расширенным данным,если используется поле из массива атрибутов ('documents.100016.ref_num'), то должно быть значение 'true'"`
+	IsPrimaryKey    bool     `schema:"Первичны ключ,если поле является первичным ключом для профиля, то рекомендуется значение true, для оптимизации поиска"`
 }
 
 func (bo BinaryOperation) IsValid() bool {
