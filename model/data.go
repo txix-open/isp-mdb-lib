@@ -217,7 +217,7 @@ func concurrentFetchData(tableName string, batchSize int, f func(list []entity.T
 
 func fetchDataWithCursor(table string, batchSize int, f func(list []entity.TransitDataRecord) bool) func(tx *pg.Tx) error {
 	return func(tx *pg.Tx) error {
-		_, err := tx.Exec(fmt.Sprintf("DECLARE %s CURSOR FOR SELECT * FROM %s.%s", cursorName, schema, table))
+		_, err := tx.Exec(fmt.Sprintf("DECLARE %s CURSOR FOR SELECT * FROM %s.%s ORDER BY version", cursorName, schema, table))
 		if err != nil {
 			return err
 		}
