@@ -72,13 +72,13 @@
   revision = "368713356c71961354e09ab9b734740ebdd94784"
 
 [[projects]]
-  digest = "1:f81f47133b6e2a5940590719ca66433c206d4c08dcae5c61a070efc0bf3862db"
+  digest = "1:c0d84abe849d9fb275b810dbfd9ff5c32acc182ae9dac0387d71096158e5d4c3"
   name = "github.com/integration-system/isp-lib"
   packages = [
     "atomic",
     "backend",
     "database",
-    "logger",
+    "http",
     "modules",
     "proto/stubs",
     "streaming",
@@ -86,8 +86,19 @@
     "utils",
   ]
   pruneopts = "UT"
-  revision = "b110f4b47bc34145bda99c67560a780013d12f55"
-  version = "v1.6.3"
+  revision = "2c01cb9ba937b74ecae81b6fa58e39cdf38cbe1e"
+  version = "v2.1.1"
+
+[[projects]]
+  digest = "1:8fdc7cadd20af14d1378c295a0293c6884587a5940fc5f9f2b0e42a660077ec4"
+  name = "github.com/integration-system/isp-log"
+  packages = [
+    ".",
+    "stdcodes",
+  ]
+  pruneopts = "UT"
+  revision = "0d7239fe0c60cb08d71b519c39cf614ee019065f"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
@@ -109,6 +120,18 @@
   version = "v1.1.5"
 
 [[projects]]
+  digest = "1:1d965d8955ca44e9c963e24fdf0517033ca1820b6643ec546106dc2040ed54a0"
+  name = "github.com/klauspost/compress"
+  packages = [
+    "flate",
+    "gzip",
+    "zlib",
+  ]
+  pruneopts = "UT"
+  revision = "b9d5dc7bd435c628cb0c658ce7f556409007ea71"
+  version = "v1.10.0"
+
+[[projects]]
   digest = "1:31e761d97c76151dde79e9d28964a812c46efc5baee4085b86f68f0c654450de"
   name = "github.com/konsorten/go-windows-terminal-sequences"
   packages = ["."]
@@ -126,30 +149,6 @@
   pruneopts = "UT"
   revision = "4ded0e9383f75c197b3a2aaa6d590ac52df6fd79"
   version = "v1.0.0"
-
-[[projects]]
-  digest = "1:2fa7b0155cd54479a755c629de26f888a918e13f8857a2c442205d825368e084"
-  name = "github.com/mattn/go-colorable"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "3a70a971f94a22f2fa562ffcc7a0eb45f5daf045"
-  version = "v0.1.1"
-
-[[projects]]
-  digest = "1:3bb9c8451d199650bfd303e0068d86f135952fead374ad87c09a9b8a2cc4bd7c"
-  name = "github.com/mattn/go-isatty"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "369ecd8cea9851e459abb67eb171853e3986591e"
-  version = "v0.0.6"
-
-[[projects]]
-  branch = "master"
-  digest = "1:2b32af4d2a529083275afc192d1067d8126b578c7a9613b26600e4df9c735155"
-  name = "github.com/mgutz/ansi"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "9520e82c474b0a04dd04f8a40959027271bab992"
 
 [[projects]]
   digest = "1:33422d238f147d247752996a26574ac48dcf472976eda7f5134015f06bf16563"
@@ -192,12 +191,24 @@
   version = "v1.3.0"
 
 [[projects]]
-  digest = "1:39a425f98fb19427061a693fe6bf0683c9bddec4b25b17067e34fdb465e39cb9"
-  name = "github.com/x-cray/logrus-prefixed-formatter"
+  digest = "1:c468422f334a6b46a19448ad59aaffdfc0a36b08fdcc1c749a0b29b6453d7e59"
+  name = "github.com/valyala/bytebufferpool"
   packages = ["."]
   pruneopts = "UT"
-  revision = "bb2702d423886830dee131692131d35648c382e2"
-  version = "v0.5.2"
+  revision = "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7"
+  version = "v1.0.0"
+
+[[projects]]
+  digest = "1:15ad8a80098fcc7a194b9db6b26d74072a852e4faa957848c8118193d3c69230"
+  name = "github.com/valyala/fasthttp"
+  packages = [
+    ".",
+    "fasthttputil",
+    "stackless",
+  ]
+  pruneopts = "UT"
+  revision = "e5f51c11919d4f66400334047b897ef0a94c6f3c"
+  version = "v20180529"
 
 [[projects]]
   branch = "master"
@@ -330,6 +341,7 @@
     "github.com/integration-system/isp-lib/atomic",
     "github.com/integration-system/isp-lib/backend",
     "github.com/integration-system/isp-lib/database",
+    "github.com/integration-system/isp-lib/http",
     "github.com/integration-system/isp-lib/modules",
     "github.com/json-iterator/go",
     "google.golang.org/grpc/codes",
