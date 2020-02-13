@@ -1,13 +1,14 @@
 package service
 
 import (
-	"github.com/integration-system/isp-lib/atomic"
-	"github.com/integration-system/isp-lib/backend"
-	"github.com/integration-system/isp-lib/modules"
-	"github.com/integration-system/isp-mdb-lib/query"
-	"github.com/integration-system/isp-mdb-lib/structure"
 	"sync"
 	"time"
+
+	"github.com/integration-system/isp-lib/v2/atomic"
+	"github.com/integration-system/isp-lib/v2/backend"
+	"github.com/integration-system/isp-lib/v2/modules"
+	"github.com/integration-system/isp-mdb-lib/query"
+	"github.com/integration-system/isp-mdb-lib/structure"
 )
 
 type SearchService struct {

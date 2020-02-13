@@ -2,13 +2,14 @@ package model
 
 import (
 	"fmt"
-	"github.com/go-pg/pg"
-	"github.com/integration-system/isp-lib/atomic"
-	"github.com/integration-system/isp-lib/database"
-	"github.com/integration-system/isp-mdb-lib/entity"
 	"math"
 	"runtime"
 	"sync"
+
+	"github.com/go-pg/pg/v9"
+	"github.com/integration-system/isp-lib/v2/atomic"
+	"github.com/integration-system/isp-lib/v2/database"
+	"github.com/integration-system/isp-mdb-lib/entity"
 )
 
 const (
