@@ -14,7 +14,7 @@ type ApiResponse struct {
 
 func (r *ApiResponse) GetError() error {
 	if r.ErrorCode != 0 {
-		return fmt.Errorf("error code %d, message '%s'", r.ErrorCode, r.ErrorMessage)
+		return fmt.Errorf("error code %d, message %q", r.ErrorCode, r.ErrorMessage)
 	}
 	return nil
 }

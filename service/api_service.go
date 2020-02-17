@@ -44,8 +44,8 @@ func (s *ApiService) doRequest(method string, request interface{}, response *str
 	err := s.client.Invoke("POST", s.address+method, s.headers, request, response)
 	if err != nil {
 		return err
-	} else if response.GetError() != nil {
-		return err
+	} else if apiErr := response.GetError(); apiErr != nil {
+		return apiErr
 	}
 	return nil
 }
