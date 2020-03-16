@@ -2,7 +2,7 @@ package service
 
 import (
 	"github.com/integration-system/isp-lib/v2/backend"
-	"github.com/integration-system/isp-lib/v2/modules"
+	"github.com/integration-system/isp-mdb-lib/modules"
 	"github.com/integration-system/isp-mdb-lib/structure"
 )
 
