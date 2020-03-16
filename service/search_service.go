@@ -108,58 +108,48 @@ func (s *SearchService) ParallelSearchWithScrolls(
 }
 
 func (s *SearchService) convertCount(req structure.CountRequest, resPtr interface{}) error {
-	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
-		return c.Invoke(
-			modules.MdmDumperLinks.MdmSearchService.Count,
-			s.callerId,
-			req,
-			resPtr,
-		)
-	})
+	return s.client.Invoke(
+		modules.MdmDumperLinks.MdmSearchService.Count,
+		s.callerId,
+		req,
+		resPtr,
+	)
 }
 
 func (s *SearchService) convertSearch(req structure.SearchRequest, resPtr interface{}) error {
-	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
-		return c.Invoke(
-			modules.MdmApiLinks.MdmSearchService.Search,
-			s.callerId,
-			req,
-			resPtr,
-		)
-	})
+	return s.client.Invoke(
+		modules.MdmApiLinks.MdmSearchService.Search,
+		s.callerId,
+		req,
+		resPtr,
+	)
 }
 
 func (s *SearchService) convertSearchIdList(req structure.SearchRequest, resPtr interface{}) error {
-	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
-		return c.Invoke(
-			modules.MdmApiLinks.MdmSearchService.SearchIdList,
-			s.callerId,
-			req,
-			resPtr,
-		)
-	})
+	return s.client.Invoke(
+		modules.MdmApiLinks.MdmSearchService.SearchIdList,
+		s.callerId,
+		req,
+		resPtr,
+	)
 }
 
 func (s *SearchService) convertSearchIdWithScroll(req structure.SearchWithScrollRequest, resPtr interface{}) error {
-	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
-		return c.Invoke(
-			modules.MdmAsyncApiLinks.MdmSearchService.SearchIdWithScroll,
-			s.callerId,
-			req,
-			resPtr,
-		)
-	})
+	return s.client.Invoke(
+		modules.MdmAsyncApiLinks.MdmSearchService.SearchIdWithScroll,
+		s.callerId,
+		req,
+		resPtr,
+	)
 }
 
 func (s *SearchService) convertGetPreferredSlicesCount(isTech bool, resPtr interface{}) error {
-	return s.client.Visit(func(c *backend.InternalGrpcClient) error {
-		return c.Invoke(
-			modules.MdmAsyncApiLinks.MdmSearchService.PreferredSlicesCount,
-			s.callerId,
-			structure.PreferredSearchSlicesRequest{IsTech: isTech},
-			resPtr,
-		)
-	})
+	return s.client.Invoke(
+		modules.MdmAsyncApiLinks.MdmSearchService.PreferredSlicesCount,
+		s.callerId,
+		structure.PreferredSearchSlicesRequest{IsTech: isTech},
+		resPtr,
+	)
 }
 
 func NewSeachService(client *backend.RxGrpcClient, callerId int) SearchService {
