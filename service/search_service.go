@@ -26,8 +26,8 @@ func (s *SearchService) SearchCount(req structure.CountRequest) (*structure.Coun
 	return res, s.convertCount(req, res)
 }
 
-func (s *SearchService) SearchIdList(req structure.SearchRequest) (*structure.SearchResponse, error) {
-	res := new(structure.SearchResponse)
+func (s *SearchService) SearchIdList(req structure.SearchRequest) (*structure.SearchIdResponse, error) {
+	res := new(structure.SearchIdResponse)
 	return res, s.convertSearchIdList(req, res)
 }
 

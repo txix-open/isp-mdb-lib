@@ -2,6 +2,7 @@ package entity
 
 import (
 	"encoding/json"
+
 	"github.com/integration-system/isp-mdb-lib/diff"
 )
 
@@ -10,6 +11,7 @@ type BaseNotification struct {
 	OperationId string
 	Version     int64
 	IsTech      bool
+	Delete      bool
 	Delta       diff.Delta
 }
 
