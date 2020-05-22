@@ -60,7 +60,9 @@ func (s *SearchService) ParallelSearchWithScrolls(
 			scrollId := ""
 			for fetching.Get() {
 				req := structure.SearchWithScrollRequest{
-					IsTech:    isTech,
+					TypeDescriptor: structure.TypeDescriptor{
+						IsTech: isTech,
+					},
 					Condition: q,
 					BatchSize: batchSize,
 					ScrollId:  scrollId,
@@ -147,7 +149,11 @@ func (s *SearchService) convertGetPreferredSlicesCount(isTech bool, resPtr inter
 	return s.client.Invoke(
 		modules.MdmAsyncApiLinks.MdmSearchService.PreferredSlicesCount,
 		s.callerId,
-		structure.PreferredSearchSlicesRequest{IsTech: isTech},
+		structure.PreferredSearchSlicesRequest{
+			TypeDescriptor: structure.TypeDescriptor{
+				IsTech: isTech,
+			},
+		},
 		resPtr,
 	)
 }
