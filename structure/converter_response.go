@@ -187,10 +187,12 @@ func (e ConvertSearchError) Error() string {
 
 type ConvertSearchResponse struct {
 	Condition *query.Term
+	Type      string
 	Error     *ConvertSearchError
 }
 
 type ConvertAnySearchResponse struct {
 	Condition         *query.Term
+	Type              string
 	UnavailableFields []string
 }

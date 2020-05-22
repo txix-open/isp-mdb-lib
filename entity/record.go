@@ -14,6 +14,7 @@ type BaseRecord struct {
 	Id         int64
 	ExternalId string `valid:"required~Required"`
 	Version    int64  `valid:"required~Required"`
+	Type       string
 	UpdatedAt  time.Time
 	CreatedAt  time.Time
 }

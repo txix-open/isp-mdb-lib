@@ -6,19 +6,19 @@ import (
 )
 
 type SearchRequest struct {
-	Limit     int
-	Offset    int
-	IsTech    bool
+	Limit  int
+	Offset int
+	TypeDescriptor
 	Condition query.Term
 }
 
 type CountRequest struct {
-	IsTech    bool
+	TypeDescriptor
 	Condition query.Term
 }
 
 type SearchWithScrollRequest struct {
-	IsTech    bool
+	TypeDescriptor
 	Condition query.Term
 	BatchSize int `valid:"required~Required"`
 	ScrollId  string
@@ -30,5 +30,10 @@ type SearchWithScrollRequest struct {
 }
 
 type PreferredSearchSlicesRequest struct {
+	TypeDescriptor
+}
+
+type TypeDescriptor struct {
 	IsTech bool
+	Type   string
 }

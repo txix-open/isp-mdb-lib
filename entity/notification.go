@@ -9,6 +9,7 @@ import (
 type BaseNotification struct {
 	ExternalId  string
 	OperationId string
+	Type        string
 	Version     int64
 	IsTech      bool
 	Delete      bool
