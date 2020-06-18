@@ -6,8 +6,10 @@ import (
 )
 
 const (
-	ScriptServiceExecuteByIdAddr = "script/script/execute_by_id"
-	ScriptServiceExecuteAddr     = "script/script/execute"
+	ScriptServiceExecuteByIdAddr  = "script/script/execute_by_id"
+	ScriptServiceExecuteAddr      = "script/script/execute"
+	ScriptServiceBatchExecute     = "script/script/batch_execute"
+	ScriptServiceBatchExecuteById = "script/script/batch_execute_by_ids"
 )
 
 type ScriptService struct {
@@ -37,6 +39,26 @@ func (s *ScriptService) Execute(req structure.ExecuteRequest, responseResPtr int
 		res,
 	)
 	return res, err
+}
+
+func (s *ScriptService) BatchExecute(req []structure.ExecuteByIdRequest, responsePtr interface{}) error {
+	err := s.client.Invoke(
+		ScriptServiceBatchExecute,
+		s.callerId,
+		req,
+		responsePtr,
+	)
+	return err
+}
+
+func (s *ScriptService) BatchExecuteById(req structure.BatchExecuteByIdsRequest, responsePtr interface{}) error {
+	err := s.client.Invoke(
+		ScriptServiceBatchExecuteById,
+		s.callerId,
+		req,
+		responsePtr,
+	)
+	return err
 }
 
 func NewScriptService(client *backend.RxGrpcClient, callerId int) *ScriptService {
