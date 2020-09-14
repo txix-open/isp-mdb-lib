@@ -18,7 +18,7 @@ type PersonIncoming struct {
 	Citizen           Citizen                 `xml:"citizen,omitempty"`
 	Inn               *StringWithLastModified `xml:"inn,omitempty"`
 	Oms               *StringWithLastModified `xml:"oms,omitempty"`
-	IdentityDocuments IdentityDocuments       `xml:"identity_documents,omitempty"`
+	IdentityDocuments *IdentityDocuments      `xml:"identity_documents,omitempty"`
 }
 
 type Citizen struct {
