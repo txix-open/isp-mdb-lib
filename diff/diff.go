@@ -1,9 +1,10 @@
 package diff
 
 import (
+	"reflect"
+
 	"github.com/integration-system/bellows"
 	"github.com/integration-system/go-cmp/cmp"
-	"reflect"
 )
 
 type Operation string
@@ -38,6 +39,21 @@ func EvalDiff(left, right map[string]interface{}, opts ...Option) (bool, Delta) 
 
 func FlattenDelta(delta Delta) map[string]*DiffDescriptor {
 	result := make(map[string]*DiffDescriptor, len(delta)*2)
+	extensionDelta(func(diff *DiffDescriptor) {
+		result[diff.Path] = diff
+	}, delta)
+	return result
+}
+
+func ExtensionDelta(delta Delta) Delta {
+	result := make([]*DiffDescriptor, 0)
+	extensionDelta(func(diff *DiffDescriptor) {
+		result = append(result, diff)
+	}, delta)
+	return result
+}
+
+func extensionDelta(callback func(diff *DiffDescriptor), delta Delta) {
 	for _, desc := range delta {
 		if desc.Operation == Add || desc.Operation == ArrayAdd {
 			rt := reflect.TypeOf(desc.NewValue)
@@ -46,10 +62,10 @@ func FlattenDelta(delta Delta) map[string]*DiffDescriptor {
 				flattenValue := bellows.Flatten(desc.NewValue)
 				for path, value := range flattenValue {
 					newPath := getNewPath(desc.Path, path, rt.Kind())
-					result[newPath] = &DiffDescriptor{NewValue: value, Path: newPath, Operation: Add}
+					callback(&DiffDescriptor{NewValue: value, Path: newPath, Operation: Add})
 				}
 			default:
-				result[desc.Path] = desc
+				callback(desc)
 			}
 		} else if desc.Operation == Delete || desc.Operation == ArrayDelete {
 			rt := reflect.TypeOf(desc.OldValue)
@@ -58,17 +74,15 @@ func FlattenDelta(delta Delta) map[string]*DiffDescriptor {
 				flattenValue := bellows.Flatten(desc.OldValue)
 				for path, value := range flattenValue {
 					newPath := getNewPath(desc.Path, path, rt.Kind())
-					result[newPath] = &DiffDescriptor{OldValue: value, Path: newPath, Operation: Delete}
+					callback(&DiffDescriptor{OldValue: value, Path: newPath, Operation: Delete})
 				}
 			default:
-				result[desc.Path] = desc
+				callback(desc)
 			}
 		} else {
-			result[desc.Path] = desc
+			callback(desc)
 		}
 	}
-
-	return result
 }
 
 func getNewPath(base string, path string, kind reflect.Kind) string {
