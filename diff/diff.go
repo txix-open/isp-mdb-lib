@@ -30,7 +30,10 @@ type DiffDescriptor struct {
 	NewIndex       *int        `json:"newIndex,omitempty"`
 }
 
-type Delta []*DiffDescriptor
+type (
+	Delta            []*DiffDescriptor
+	extensionHandler func(diff *DiffDescriptor)
+)
 
 func EvalDiff(left, right map[string]interface{}, opts ...Option) (bool, Delta) {
 	c := NewDiffCollector(opts...)
@@ -53,9 +56,10 @@ func ExtensionDelta(delta Delta) Delta {
 	return result
 }
 
-func extensionDelta(callback func(diff *DiffDescriptor), delta Delta) {
+func extensionDelta(callback extensionHandler, delta Delta) {
 	for _, desc := range delta {
-		if desc.Operation == Add || desc.Operation == ArrayAdd {
+		switch {
+		case (desc.Operation == Add || desc.Operation == ArrayAdd) && desc.NewValue != nil:
 			rt := reflect.TypeOf(desc.NewValue)
 			switch rt.Kind() {
 			case reflect.Map, reflect.Slice, reflect.Array, reflect.Struct:
@@ -67,7 +71,7 @@ func extensionDelta(callback func(diff *DiffDescriptor), delta Delta) {
 			default:
 				callback(desc)
 			}
-		} else if desc.Operation == Delete || desc.Operation == ArrayDelete {
+		case (desc.Operation == Delete || desc.Operation == ArrayDelete) && desc.OldValue != nil:
 			rt := reflect.TypeOf(desc.OldValue)
 			switch rt.Kind() {
 			case reflect.Map, reflect.Slice, reflect.Array, reflect.Struct:
@@ -79,7 +83,7 @@ func extensionDelta(callback func(diff *DiffDescriptor), delta Delta) {
 			default:
 				callback(desc)
 			}
-		} else {
+		default:
 			callback(desc)
 		}
 	}

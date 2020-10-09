@@ -9,5 +9,6 @@ require (
 	github.com/integration-system/gowsdl v1.0.0
 	github.com/integration-system/isp-lib/v2 v2.4.0
 	github.com/json-iterator/go v1.1.9
+	github.com/stretchr/testify v1.5.1
 	google.golang.org/grpc v1.28.0
 )
