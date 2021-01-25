@@ -18,6 +18,6 @@ type MdmHandleRequest struct {
 	Record      *entity.DataRecord `valid:"required~Required"`
 }
 
-type MdmAttribute struct {
+type MdmAttributeRequest struct {
 	TypeName string
 }

@@ -196,3 +196,8 @@ type ConvertAnySearchResponse struct {
 	Type              string
 	UnavailableFields []string
 }
+
+type MappingResponse struct {
+	Mapping map[string]interface{}
+	Type    string
+}
