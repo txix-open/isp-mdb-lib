@@ -130,3 +130,8 @@ type ConvertAnySearchRequest struct {
 	ApplicationId int32           `valid:"required~Required"`
 	Protocol      ProtocolVersion
 }
+
+type MappingRequest struct {
+	ApplicationId int32           `valid:"required~Required"`
+	Protocol      ProtocolVersion `valid:"required~Required"`
+}
