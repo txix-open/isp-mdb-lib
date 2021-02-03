@@ -6,7 +6,7 @@ import (
 
 type StringWithLastModified struct {
 	Value        string `xml:",chardata"`
-	Lastmodified string `xml:"last_modified,attr"`
+	LastModified string `xml:"last_modified,attr"`
 }
 
 type PersonsIncoming struct {
@@ -21,8 +21,8 @@ type PersonIncoming struct {
 	Inn                *StringWithLastModified `xml:"inn,omitempty"`
 	Oms                *StringWithLastModified `xml:"oms,omitempty"`
 	Death              *Death                  `xml:"death,omitempty"`
-	//Divorce            *DivorceData            `xml:"divorce,omitempty"`
-	CitizenAddresses *CitizenAddresses `xml:"citizen_addresses,omitempty"`
+	Divorce            *DivorceData            `xml:"divorce,omitempty"`
+	CitizenAddresses   *CitizenAddresses       `xml:"citizen_addresses,omitempty"`
 }
 
 type CitizenAddresses struct {
@@ -30,11 +30,11 @@ type CitizenAddresses struct {
 }
 
 type CitizenAddress struct {
-	AddressType      string                  `xml:"address_type,omitempty"`
-	Address          *Address                `xml:"address,omitempty"`
-	RegistrationDate *StringWithLastModified `xml:"registration_date,omitempty"`
-	DepartureDate    *StringWithLastModified `xml:"departure_date,omitempty"`
-	Lastmodified     string                  `xml:"last_modified,attr"`
+	AddressType      string   `xml:"address_type,omitempty"`
+	Address          *Address `xml:"address,omitempty"`
+	RegistrationDate string   `xml:"registration_date,omitempty"`
+	DepartureDate    string   `xml:"departure_date,omitempty"`
+	LastModified     string   `xml:"last_modified,attr"`
 }
 
 type Address struct {
@@ -42,6 +42,7 @@ type Address struct {
 	PostIndex      string `xml:"post_index,omitempty"`
 	SettlementCode string `xml:"settlement_code,omitempty"`
 	StreetCode     string `xml:"street_code,omitempty"`
+	StreetName     string `xml:"street_name,omitempty"`
 	HouseCode      string `xml:"house_code,omitempty"`
 	House          string `xml:"house,omitempty"`
 	Corpus         string `xml:"corpus,omitempty"`
@@ -50,15 +51,17 @@ type Address struct {
 }
 
 type DivorceData struct {
-	Document        *SimpleDocument         `xml:"document,omitempty"`
-	DivorceDate     *StringWithLastModified `xml:"divorce_date,omitempty"`
-	SourceValueCode string                  `xml:"source_value_code,omitempty"`
+	Document        *SimpleDocument `xml:"document,omitempty"`
+	DivorceDate     string          `xml:"divorce_date,omitempty"`
+	SourceValueCode string          `xml:"source_value_code,omitempty"`
+	LastModified    string          `xml:"last_modified,omitempty"`
 }
 
 type Death struct {
-	Document        *SimpleDocument         `xml:"document,omitempty"`
-	DeathDate       *StringWithLastModified `xml:"death_date,omitempty"`
-	SourceValueCode string                  `xml:"source_value_code,omitempty"`
+	Document        *SimpleDocument `xml:"document,omitempty"`
+	DeathDate       string          `xml:"death_date,omitempty"`
+	SourceValueCode string          `xml:"source_value_code,omitempty"`
+	LastModified    string          `xml:"last_modified,omitempty"`
 }
 
 type SimpleDocument struct {
@@ -80,14 +83,14 @@ type CitizenName struct {
 	Surname      string `xml:"surname,omitempty"`
 	Firstname    string `xml:"firstname,omitempty"`
 	Patronymic   string `xml:"patronymic,omitempty"`
-	Lastmodified string `xml:"last_modified,attr"`
+	LastModified string `xml:"last_modified,attr"`
 }
 
 type IdentityDocuments struct {
-	Document []CitizenDocument `xml:"document,omitempty"`
+	Document []CitizenDoc `xml:"document,omitempty"`
 }
 
-type CitizenDocument struct {
+type CitizenDoc struct {
 	DoctypePk      string `xml:"doctype_pk,omitempty"`
 	Serial         string `xml:"serial,omitempty"`
 	Number         string `xml:"number,omitempty"`
@@ -95,5 +98,5 @@ type CitizenDocument struct {
 	DocIssuePlace  string `xml:"doc_issue_place,omitempty"`
 	DocauthorityPk string `xml:"docauthority_pk,omitempty"`
 	IsDropped      string `xml:"is_dropped,omitempty"`
-	Lastmodified   string `xml:"last_modified,attr"`
+	LastModified   string `xml:"last_modified,attr"`
 }
