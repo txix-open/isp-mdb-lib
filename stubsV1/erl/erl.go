@@ -54,14 +54,14 @@ type DivorceData struct {
 	Document        *SimpleDocument `xml:"document,omitempty"`
 	DivorceDate     string          `xml:"divorce_date,omitempty"`
 	SourceValueCode string          `xml:"source_value_code,omitempty"`
-	LastModified    string          `xml:"last_modified,omitempty"`
+	LastModified    string          `xml:"last_modified,attr"`
 }
 
 type Death struct {
 	Document        *SimpleDocument `xml:"document,omitempty"`
 	DeathDate       string          `xml:"death_date,omitempty"`
 	SourceValueCode string          `xml:"source_value_code,omitempty"`
-	LastModified    string          `xml:"last_modified,omitempty"`
+	LastModified    string          `xml:"last_modified,attr"`
 }
 
 type SimpleDocument struct {
