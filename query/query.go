@@ -55,7 +55,7 @@ func (bo BinaryOperation) IsValid() bool {
 	if !ok {
 		return false
 	}
-	return bo.Value != "" || (bo.Operator == Exists || bo.Operator == NotExists)
+	return bo.Operator == Exists || bo.Operator == NotExists
 }
 
 type LogicOperation struct {

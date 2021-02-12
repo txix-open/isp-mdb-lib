@@ -17,3 +17,7 @@ type MdmHandleRequest struct {
 	OperationId string
 	Record      *entity.DataRecord `valid:"required~Required"`
 }
+
+type MdmAttributeRequest struct {
+	TypeName string
+}

@@ -20,14 +20,14 @@ type BaseRecord struct {
 }
 
 type DataRecord struct {
-	tableName string `sql:"?db_schema.data_records" json:"-"`
+	tableName string `pg:"?db_schema.data_records" json:"-"`
 	*BaseRecord
 	Data       map[string]interface{} `valid:"required~Required"`
 	CustomData map[string]interface{}
 }
 
 type TransitDataRecord struct {
-	tableName string `sql:"?db_schema.data_records" json:"-"`
+	tableName string `pg:"?db_schema.data_records" json:"-"`
 	*BaseRecord
 	Data       json.RawMessage `valid:"required~Required"`
 	CustomData json.RawMessage

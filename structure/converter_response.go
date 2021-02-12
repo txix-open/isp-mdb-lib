@@ -196,3 +196,7 @@ type ConvertAnySearchResponse struct {
 	Type              string
 	UnavailableFields []string
 }
+
+type MappingTypeResponse struct {
+	Type string
+}
