@@ -1,13 +1,11 @@
 package diff
 
 import (
-	"reflect"
-
 	"github.com/integration-system/bellows"
 	"github.com/integration-system/go-cmp/cmp"
+	"reflect"
+	"regexp"
 )
-
-type Operation string
 
 const (
 	Add    Operation = "ADD"
@@ -20,19 +18,26 @@ const (
 	ArraySwap   Operation = "ARRAY_SWAP"
 )
 
-type DiffDescriptor struct {
-	OldValue       interface{} `json:"oldValue,omitempty"`
-	NewValue       interface{} `json:"newValue,omitempty"`
-	Path           string      `json:"path"`
-	Operation      Operation   `json:"operation"`
-	AdditionalData interface{} `json:"additionalData,omitempty"`
-	OldIndex       *int        `json:"oldIndex,omitempty"`
-	NewIndex       *int        `json:"newIndex,omitempty"`
-}
+var (
+	mapIndexRegexp   = regexp.MustCompile(`\[\d*]`)
+	arrayIndexRegexp = regexp.MustCompile(`\.\.`)
+)
 
 type (
-	Delta            []*DiffDescriptor
-	extensionHandler func(diff *DiffDescriptor)
+	Operation string
+
+	DiffDescriptor struct {
+		OldValue       interface{} `json:"oldValue,omitempty"`
+		NewValue       interface{} `json:"newValue,omitempty"`
+		Path           string      `json:"path"`
+		Operation      Operation   `json:"operation"`
+		AdditionalData interface{} `json:"additionalData,omitempty"`
+		OldIndex       *int        `json:"oldIndex,omitempty"`
+		NewIndex       *int        `json:"newIndex,omitempty"`
+	}
+
+	Delta         []*DiffDescriptor
+	resultHandler func(diff *DiffDescriptor)
 )
 
 func EvalDiff(left, right map[string]interface{}, opts ...Option) (bool, Delta) {
@@ -42,21 +47,34 @@ func EvalDiff(left, right map[string]interface{}, opts ...Option) (bool, Delta) 
 
 func FlattenDelta(delta Delta) map[string]*DiffDescriptor {
 	result := make(map[string]*DiffDescriptor, len(delta)*2)
-	extensionDelta(func(diff *DiffDescriptor) {
+	resultHandler := resultHandler(func(diff *DiffDescriptor) {
 		result[diff.Path] = diff
-	}, delta)
+	})
+
+	extensionDelta(delta, resultHandler)
 	return result
 }
 
 func ExtensionDelta(delta Delta) Delta {
 	result := make([]*DiffDescriptor, 0)
-	extensionDelta(func(diff *DiffDescriptor) {
+	resultHandler := resultHandler(func(diff *DiffDescriptor) {
 		result = append(result, diff)
-	}, delta)
+	})
+	extensionDelta(delta, resultHandler)
 	return result
 }
 
-func extensionDelta(callback extensionHandler, delta Delta) {
+func ReplaceArray(delta Delta) Delta {
+	result := make([]*DiffDescriptor, len(delta))
+	for i, descriptor := range delta {
+		path := mapIndexRegexp.ReplaceAllStringFunc(descriptor.Path, func(s string) string { return "" })
+		descriptor.Path = arrayIndexRegexp.ReplaceAllStringFunc(path, func(s string) string { return "." })
+		result[i] = descriptor
+	}
+	return result
+}
+
+func extensionDelta(delta Delta, callback resultHandler) {
 	for _, desc := range delta {
 		switch {
 		case (desc.Operation == Add || desc.Operation == ArrayAdd) && desc.NewValue != nil:
