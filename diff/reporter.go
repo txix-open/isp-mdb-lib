@@ -23,7 +23,7 @@ func (dc *diffCollector) Report(x, y reflect.Value, eq bool, p cmp.Path) {
 	newPath := make(cmp.Path, 0, len(p))
 	for _, ps := range p {
 		switch ps.(type) {
-		case cmp.SliceIndex, cmp.StructField, cmp.MapIndex:
+		case cmp.SliceIndex, cmp.StructField, cmp.MapIndex: //todo cmp.SliceIndex invalid path
 			newPath = append(newPath, ps)
 		}
 	}
