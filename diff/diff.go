@@ -19,8 +19,7 @@ const (
 )
 
 var (
-	mapIndexRegexp   = regexp.MustCompile(`\[\d*]`)
-	arrayIndexRegexp = regexp.MustCompile(`\.\.`)
+	mapIndexRegexp = regexp.MustCompile(`\.\[\d*]`)
 )
 
 type (
@@ -67,8 +66,7 @@ func ExtensionDelta(delta Delta) Delta {
 func ReplaceArray(delta Delta) Delta {
 	result := make([]*DiffDescriptor, len(delta))
 	for i, descriptor := range delta {
-		path := mapIndexRegexp.ReplaceAllStringFunc(descriptor.Path, func(s string) string { return "" })
-		descriptor.Path = arrayIndexRegexp.ReplaceAllStringFunc(path, func(s string) string { return "." })
+		descriptor.Path = mapIndexRegexp.ReplaceAllStringFunc(descriptor.Path, func(s string) string { return "" })
 		result[i] = descriptor
 	}
 	return result
