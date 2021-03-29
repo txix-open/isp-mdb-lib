@@ -1,10 +1,11 @@
 package diff
 
 import (
-	"github.com/integration-system/bellows"
-	"github.com/integration-system/go-cmp/cmp"
 	"reflect"
 	"regexp"
+
+	"github.com/integration-system/bellows"
+	"github.com/integration-system/go-cmp/cmp"
 )
 
 const (
@@ -98,6 +99,38 @@ func extensionDelta(delta Delta, callback resultHandler) {
 				}
 			default:
 				callback(desc)
+			}
+		case desc.Operation == ArrayChange:
+			changedFields := make(map[string]bool)
+			if desc.OldValue != nil {
+				rt := reflect.TypeOf(desc.OldValue)
+				switch rt.Kind() {
+				case reflect.Map, reflect.Slice, reflect.Array, reflect.Struct:
+					flattenValue := bellows.Flatten(desc.OldValue)
+					for path, value := range flattenValue {
+						changedFields[path] = true
+						newPath := getNewPath(desc.Path, path, rt.Kind())
+						callback(&DiffDescriptor{OldValue: value, Path: newPath, Operation: Delete})
+					}
+				default:
+					callback(desc)
+				}
+			}
+			if desc.NewValue != nil {
+				rt := reflect.TypeOf(desc.NewValue)
+				switch rt.Kind() {
+				case reflect.Map, reflect.Slice, reflect.Array, reflect.Struct:
+					flattenValue := bellows.Flatten(desc.NewValue)
+					for path, value := range flattenValue {
+						if changedFields[path] {
+							continue
+						}
+						newPath := getNewPath(desc.Path, path, rt.Kind())
+						callback(&DiffDescriptor{NewValue: value, Path: newPath, Operation: Add})
+					}
+				default:
+					callback(desc)
+				}
 			}
 		default:
 			callback(desc)
