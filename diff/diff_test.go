@@ -1,82 +1,139 @@
 package diff
 
 import (
-	"encoding/json"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestEvalDiff(t *testing.T) {
-	oldValue := []byte(`
-{"cards":{"9":[{"del_sign":false,"card_type":"9","etalon_id":"1","mdm_obj_id":"1","primary_id":"1","card_number":"0490000657517","card_species":"03","last_update_dt":"2021-02-11 15:41:13.000","sourcechannels":[17]}]},"users":{"SSO":[{"id_type":"SSO","last_update_dt":"2021-02-11 15:41:13.000","is_confirmed_offline":false}],"ABIS":[{"id_type":"ABIS","id_value":"1","etalon_id":"1","mdm_obj_id":"1","primary_id":"1","chronicle_id":"1","last_update_dt":"2021-02-11 15:41:13.000","is_confirmed_offline":false}]},"mdm_id":"123456","contacts":{"7":[{"ref_num":"1","etalon_id":"1","mdm_obj_id":"1","last_update_dt":"2020-11-09 20:13:18.000","sourcechannels":[4],"cont_meth_cat_cd":"7"}],"8":[{"ref_num":"1","etalon_id":"1","mdm_obj_id":"1","last_update_dt":"2020-11-09 20:13:18.000","sourcechannels":[4],"cont_meth_cat_cd":"8"}]},"addresses":{"1":[{"unad":"1","unom":"1","house_no":"1","city_name":"","corpus_no":"2","etalon_id":"2","street_id":"2","confirming":false,"mdm_obj_id":"2","primary_id":"1","sourcechannels":[4]}],"8":[{"workplace":{"primary_id":"1","sourcechannels":[4],"mdm_workplaces_address_rel":"1"},"primary_id":"1","sourcechannels":[4]}]},"mdm_version":1617008663078477300,"escredentials":{},"citizen_relatives":null}`)
-	newValue := []byte(`
-{"cards":{},"users":{"SSO":[{"id_type":"SSO","last_update_dt":"2020-11-09 20:13:18.000","is_confirmed_offline":false}]},"mdm_id":"123456","contacts":{"7":[{"ref_num":"1","etalon_id":"1","mdm_obj_id":"1","last_update_dt":"2020-11-09 20:13:18.000","sourcechannels":[4],"cont_meth_cat_cd":"7"}],"8":[{"ref_num":"1","etalon_id":"1","mdm_obj_id":"1","last_update_dt":"2020-11-09 20:13:18.000","sourcechannels":[4],"cont_meth_cat_cd":"8"}]},"addresses":{"1":[{"unad":"1","unom":"1","house_no":"1","city_name":"","corpus_no":"2","etalon_id":"2","street_id":"2","confirming":false,"mdm_obj_id":"2","sourcechannels":[4]}],"8":[{"workplace":{"sourcechannels":[4],"mdm_workplaces_address_rel":"1"},"confirming":false,"mdm_obj_id":"1","street_omk":"22545","validation":false,"hpsm_number":"","stroenie_no":"","chronicle_id":"1","hpsm_comment":"","temporary_id":"1","addr_line_one":"1","addr_line_two":"1","building_name":"1","residence_num":"","last_update_dt":"1","sourcechannels":[4]}]},"mdm_version":1616771016040586500,"escredentials":{},"citizen_relatives":null}
-`)
-	a := assert.New(t)
-	var left, right map[string]interface{}
-	err := json.Unmarshal(oldValue, &left)
-	a.NoError(err)
-	err = json.Unmarshal(newValue, &right)
-	a.NoError(err)
+	left := map[string]interface{}{
+		"remove_value":   "1",
+		"changed_value":  1617008663078477300,
+		"save_old_value": "3",
+		"array": map[string]interface{}{
+			"remove": []interface{}{
+				0: map[string]interface{}{
+					"remove_1": "1",
+					"remove_2": "2",
+				},
+			},
+			"change": []interface{}{
+				0: map[string]interface{}{
+					"remove":  "remove",
+					"changed": "1",
+					"save": map[string]interface{}{
+						"i": []int{
+							4,
+						},
+						"remove": "remove",
+					},
+				},
+			},
+			"saved": []interface{}{
+				0: map[string]interface{}{
+					"1": "1",
+					"2": "2",
+				},
+			},
+		},
+		"empty":     struct{}{},
+		"undefined": nil,
+	}
 
-	expectedPath := map[string]bool{
-		"addresses.1.[0].primary_id":   true,
-		"addresses.8.[0]":              true,
-		"cards.9":                      true,
-		"mdm_version":                  true,
-		"users.ABIS":                   true,
-		"users.SSO.[0].last_update_dt": true,
+	right := map[string]interface{}{
+		"add_value":      "2",
+		"changed_value":  1616771016040586500,
+		"save_old_value": "3",
+		"array": map[string]interface{}{
+			"add": []interface{}{
+				0: map[string]interface{}{
+					"add_1": "1",
+					"add_2": "2",
+				},
+			},
+			"change": []interface{}{
+				0: map[string]interface{}{
+					"save": map[string]interface{}{
+						"i": []int{
+							4,
+						},
+						"add": "add",
+					},
+					"add":     "add",
+					"changed": "2",
+				},
+			},
+			"saved": []interface{}{
+				0: map[string]interface{}{
+					"1": "1",
+					"2": "2",
+				},
+			},
+		},
+		"empty":     struct{}{},
+		"undefined": nil,
+	}
+
+	a := assert.New(t)
+	expectedEvalDiffPath := map[string]bool{
+		"array.remove":     true,
+		"array.add":        true,
+		"array.change.[0]": true,
+		"changed_value":    true,
+		"remove_value":     true,
+		"add_value":        true,
 	}
 	_, delta := EvalDiff(left, right)
 	for _, descriptor := range delta {
-		a.True(expectedPath[descriptor.Path])
+		a.True(expectedEvalDiffPath[descriptor.Path])
 	}
 
-	expectedExtensionPath := map[string]bool{
-		"addresses.1.[0].primary_id":                           true,
-		"addresses.8.[0].primary_id":                           true,
-		"addresses.8.[0].sourcechannels.[0]":                   true,
-		"addresses.8.[0].workplace.primary_id":                 true,
-		"addresses.8.[0].workplace.sourcechannels.[0]":         true,
-		"addresses.8.[0].workplace.mdm_workplaces_address_rel": true,
-		"addresses.8.[0].validation":                           true,
-		"addresses.8.[0].hpsm_number":                          true,
-		"addresses.8.[0].stroenie_no":                          true,
-		"addresses.8.[0].building_name":                        true,
-		"addresses.8.[0].mdm_obj_id":                           true,
-		"addresses.8.[0].addr_line_one":                        true,
-		"addresses.8.[0].street_omk":                           true,
-		"addresses.8.[0].confirming":                           true,
-		"addresses.8.[0].chronicle_id":                         true,
-		"addresses.8.[0].hpsm_comment":                         true,
-		"addresses.8.[0].last_update_dt":                       true,
-		"addresses.8.[0].residence_num":                        true,
-		"addresses.8.[0].temporary_id":                         true,
-		"addresses.8.[0].addr_line_two":                        true,
-		"cards.9.[0].etalon_id":                                true,
-		"cards.9.[0].mdm_obj_id":                               true,
-		"cards.9.[0].last_update_dt":                           true,
-		"cards.9.[0].card_type":                                true,
-		"cards.9.[0].sourcechannels.[0]":                       true,
-		"cards.9.[0].del_sign":                                 true,
-		"cards.9.[0].card_species":                             true,
-		"cards.9.[0].primary_id":                               true,
-		"cards.9.[0].card_number":                              true,
-		"mdm_version":                                          true,
-		"users.ABIS.[0].mdm_obj_id":                            true,
-		"users.ABIS.[0].primary_id":                            true,
-		"users.ABIS.[0].chronicle_id":                          true,
-		"users.ABIS.[0].last_update_dt":                        true,
-		"users.ABIS.[0].is_confirmed_offline":                  true,
-		"users.ABIS.[0].id_type":                               true,
-		"users.ABIS.[0].id_value":                              true,
-		"users.ABIS.[0].etalon_id":                             true,
-		"users.SSO.[0].last_update_dt":                         true,
+	expectedExtension := map[string]*DiffDescriptor{
+		"add_value": {
+			Operation: Add, Path: "add_value", OldValue: nil, NewValue: "2",
+		},
+		"changed_value": {
+			Operation: Change, Path: "changed_value", OldValue: 1617008663078477300, NewValue: 1616771016040586500,
+		},
+		"remove_value": {
+			Operation: Delete, Path: "remove_value", OldValue: "1", NewValue: nil,
+		},
+		"array.add.[0].add_1": {
+			Operation: Add, Path: "array.add.[0].add_1", OldValue: nil, NewValue: "1",
+		},
+		"array.add.[0].add_2": {
+			Operation: Add, Path: "array.add.[0].add_2", OldValue: nil, NewValue: "2",
+		},
+		"array.remove.[0].remove_1": {
+			Operation: Delete, Path: "array.remove.[0].remove_1", OldValue: "1", NewValue: nil,
+		},
+		"array.remove.[0].remove_2": {
+			Operation: Delete, Path: "array.remove.[0].remove_2", OldValue: "2", NewValue: nil,
+		},
+		"array.change.[0].add": {
+			Operation: Change, Path: "array.change.[0].add", OldValue: nil, NewValue: "add",
+		},
+		"array.change.[0].changed": {
+			Operation: Change, Path: "array.change.[0].changed", OldValue: "1", NewValue: "2",
+		},
+		"array.change.[0].save.i.[0]": {
+			Operation: Change, Path: "array.change.[0].save.i.[0]", OldValue: 4, NewValue: 4,
+		},
+		"array.change.[0].save.add": {
+			Operation: Change, Path: "array.change.[0].save.add", OldValue: nil, NewValue: "add",
+		},
+		"array.change.[0].save.remove": {
+			Operation: Change, Path: "array.change.[0].save.remove", OldValue: "remove", NewValue: nil,
+		},
+		"array.change.[0].remove": {
+			Operation: Change, Path: "array.change.[0].remove", OldValue: "remove", NewValue: nil,
+		},
 	}
 	delta = ExtensionDelta(delta)
 	for _, descriptor := range delta {
-		a.True(expectedExtensionPath[descriptor.Path])
+		a.Equal(expectedExtension[descriptor.Path], descriptor)
+		delete(expectedExtension, descriptor.Path)
 	}
 }
 
