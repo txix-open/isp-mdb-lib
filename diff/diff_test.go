@@ -112,7 +112,7 @@ func TestEvalDiff(t *testing.T) {
 			Operation: Delete, Path: "array.remove.[0].remove_2", OldValue: "2", NewValue: nil,
 		},
 		"array.change.[0].add": {
-			Operation: Change, Path: "array.change.[0].add", OldValue: nil, NewValue: "add",
+			Operation: Add, Path: "array.change.[0].add", OldValue: nil, NewValue: "add",
 		},
 		"array.change.[0].changed": {
 			Operation: Change, Path: "array.change.[0].changed", OldValue: "1", NewValue: "2",
@@ -121,13 +121,13 @@ func TestEvalDiff(t *testing.T) {
 			Operation: Change, Path: "array.change.[0].save.i.[0]", OldValue: 4, NewValue: 4,
 		},
 		"array.change.[0].save.add": {
-			Operation: Change, Path: "array.change.[0].save.add", OldValue: nil, NewValue: "add",
+			Operation: Add, Path: "array.change.[0].save.add", OldValue: nil, NewValue: "add",
 		},
 		"array.change.[0].save.remove": {
-			Operation: Change, Path: "array.change.[0].save.remove", OldValue: "remove", NewValue: nil,
+			Operation: Delete, Path: "array.change.[0].save.remove", OldValue: "remove", NewValue: nil,
 		},
 		"array.change.[0].remove": {
-			Operation: Change, Path: "array.change.[0].remove", OldValue: "remove", NewValue: nil,
+			Operation: Delete, Path: "array.change.[0].remove", OldValue: "remove", NewValue: nil,
 		},
 	}
 	delta = ExtensionDelta(delta)

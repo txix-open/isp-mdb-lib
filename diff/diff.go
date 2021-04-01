@@ -126,7 +126,7 @@ func extensionDelta(delta Delta, callback resultHandler) {
 							callback(&DiffDescriptor{NewValue: value, OldValue: oldValue, Path: newPath, Operation: Change})
 							delete(oldValueByPath, newPath)
 						} else {
-							callback(&DiffDescriptor{NewValue: value, Path: newPath, Operation: Change})
+							callback(&DiffDescriptor{NewValue: value, Path: newPath, Operation: Add})
 						}
 					}
 				default:
@@ -135,7 +135,7 @@ func extensionDelta(delta Delta, callback resultHandler) {
 				}
 			}
 			for path, value := range oldValueByPath {
-				callback(&DiffDescriptor{OldValue: value, Path: path, Operation: Change})
+				callback(&DiffDescriptor{OldValue: value, Path: path, Operation: Delete})
 			}
 		default:
 			callback(desc)
