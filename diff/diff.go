@@ -71,7 +71,7 @@ func ReplaceArray(delta Delta) Delta {
 	return result
 }
 
-func extensionDelta(delta Delta, callback resultHandler) {
+func extensionDelta(delta Delta, resultHandler resultHandler) {
 	for _, desc := range delta {
 		switch {
 		case (desc.Operation == Add || desc.Operation == ArrayAdd) && desc.NewValue != nil:
@@ -81,10 +81,10 @@ func extensionDelta(delta Delta, callback resultHandler) {
 				flattenValue := bellows.Flatten(desc.NewValue)
 				for path, value := range flattenValue {
 					newPath := getNewPath(desc.Path, path, rt.Kind())
-					callback(&DiffDescriptor{NewValue: value, Path: newPath, Operation: Add})
+					resultHandler(&DiffDescriptor{NewValue: value, Path: newPath, Operation: Add})
 				}
 			default:
-				callback(desc)
+				resultHandler(desc)
 			}
 		case (desc.Operation == Delete || desc.Operation == ArrayDelete) && desc.OldValue != nil:
 			rt := reflect.TypeOf(desc.OldValue)
@@ -93,10 +93,10 @@ func extensionDelta(delta Delta, callback resultHandler) {
 				flattenValue := bellows.Flatten(desc.OldValue)
 				for path, value := range flattenValue {
 					newPath := getNewPath(desc.Path, path, rt.Kind())
-					callback(&DiffDescriptor{OldValue: value, Path: newPath, Operation: Delete})
+					resultHandler(&DiffDescriptor{OldValue: value, Path: newPath, Operation: Delete})
 				}
 			default:
-				callback(desc)
+				resultHandler(desc)
 			}
 		case desc.Operation == ArrayChange || desc.Operation == Change:
 			oldValueByPath := make(map[string]interface{})
@@ -110,7 +110,7 @@ func extensionDelta(delta Delta, callback resultHandler) {
 						oldValueByPath[newPath] = value
 					}
 				default:
-					callback(desc)
+					resultHandler(desc)
 					continue
 				}
 			}
@@ -119,26 +119,29 @@ func extensionDelta(delta Delta, callback resultHandler) {
 				switch rt.Kind() {
 				case reflect.Map, reflect.Slice, reflect.Array, reflect.Struct:
 					flattenValue := bellows.Flatten(desc.NewValue)
-					for path, value := range flattenValue {
+					for path, newValue := range flattenValue {
 						newPath := getNewPath(desc.Path, path, rt.Kind())
 						oldValue, found := oldValueByPath[newPath]
 						if found {
-							callback(&DiffDescriptor{NewValue: value, OldValue: oldValue, Path: newPath, Operation: Change})
 							delete(oldValueByPath, newPath)
+							if oldValue == newValue {
+								continue
+							}
+							resultHandler(&DiffDescriptor{NewValue: newValue, OldValue: oldValue, Path: newPath, Operation: Change})
 						} else {
-							callback(&DiffDescriptor{NewValue: value, Path: newPath, Operation: Add})
+							resultHandler(&DiffDescriptor{NewValue: newValue, Path: newPath, Operation: Add})
 						}
 					}
 				default:
-					callback(desc)
+					resultHandler(desc)
 					continue
 				}
 			}
-			for path, value := range oldValueByPath {
-				callback(&DiffDescriptor{OldValue: value, Path: path, Operation: Delete})
+			for path, oldValue := range oldValueByPath {
+				resultHandler(&DiffDescriptor{OldValue: oldValue, Path: path, Operation: Delete})
 			}
 		default:
-			callback(desc)
+			resultHandler(desc)
 		}
 	}
 }

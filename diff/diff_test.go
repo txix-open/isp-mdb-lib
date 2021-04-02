@@ -30,6 +30,33 @@ func TestEvalDiff(t *testing.T) {
 					},
 				},
 			},
+			// TODO get `array.change2.changed path for this indexes
+			// when must be `array.change2.[1].changed` or ADD/DELETE values
+			// bad works only for 1 field in array and 1 -> 0 indexes
+			//
+			//"change2": []interface{}{
+			//	0: map[string]interface{}{
+			//		"remove": "remove",
+			//	},
+			//	1: map[string]interface{}{
+			//		"changed":  1,
+			//	},
+			//	2: map[string]interface{}{
+			//		"save": "save",
+			//	},
+			//},
+			"change3": []interface{}{
+				0: map[string]interface{}{
+					"changed": "1",
+					"a":       1,
+				},
+				1: map[string]interface{}{
+					"remove": "remove",
+				},
+				2: map[string]interface{}{
+					"save": "save",
+				},
+			},
 			"saved": []interface{}{
 				0: map[string]interface{}{
 					"1": "1",
@@ -64,6 +91,29 @@ func TestEvalDiff(t *testing.T) {
 					"changed": "2",
 				},
 			},
+			//"change2": []interface{}{
+			//	0: map[string]interface{}{
+			//		"changed": 2,
+			//	},
+			//	1: map[string]interface{}{
+			//		"save": "save",
+			//	},
+			//	2: map[string]interface{}{
+			//		"add":  "add",
+			//	},
+			//},
+			"change3": []interface{}{
+				0: map[string]interface{}{
+					"changed": "2",
+					"a":       1,
+				},
+				1: map[string]interface{}{
+					"save": "save",
+				},
+				2: map[string]interface{}{
+					"add": "add",
+				},
+			},
 			"saved": []interface{}{
 				0: map[string]interface{}{
 					"1": "1",
@@ -80,9 +130,15 @@ func TestEvalDiff(t *testing.T) {
 		"array.remove":     true,
 		"array.add":        true,
 		"array.change.[0]": true,
-		"changed_value":    true,
-		"remove_value":     true,
-		"add_value":        true,
+		//"array.change2.[0]":         true,
+		//"array.change2.[1].changed": true,
+		//"array.change2.[2]":         true,
+		"array.change3.[0].changed": true,
+		"array.change3.[1]":         true,
+		"array.change3.[2]":         true,
+		"changed_value":             true,
+		"remove_value":              true,
+		"add_value":                 true,
 	}
 	_, delta := EvalDiff(left, right)
 	for _, descriptor := range delta {
@@ -117,9 +173,6 @@ func TestEvalDiff(t *testing.T) {
 		"array.change.[0].changed": {
 			Operation: Change, Path: "array.change.[0].changed", OldValue: "1", NewValue: "2",
 		},
-		"array.change.[0].save.i.[0]": {
-			Operation: Change, Path: "array.change.[0].save.i.[0]", OldValue: 4, NewValue: 4,
-		},
 		"array.change.[0].save.add": {
 			Operation: Add, Path: "array.change.[0].save.add", OldValue: nil, NewValue: "add",
 		},
@@ -129,12 +182,31 @@ func TestEvalDiff(t *testing.T) {
 		"array.change.[0].remove": {
 			Operation: Delete, Path: "array.change.[0].remove", OldValue: "remove", NewValue: nil,
 		},
+		//"array.change2.[0].remove": {
+		//	Operation: Delete, Path: "array.change2.[0].remove", OldValue: "remove", NewValue: nil,
+		//},
+		//"array.change2.[1].changed": {
+		//	Operation: Change, Path: "array.change2.[1].changed", OldValue: "1", NewValue: "2",
+		//},
+		//"array.change2.[2].add": {
+		//	Operation: Add, Path: "array.change2.[2].add", OldValue: nil, NewValue: "add",
+		//},
+		"array.change3.[0].changed": {
+			Operation: Change, Path: "array.change3.[0].changed", OldValue: "1", NewValue: "2",
+		},
+		"array.change3.[1].remove": {
+			Operation: Delete, Path: "array.change3.[1].remove", OldValue: "remove", NewValue: nil,
+		},
+		"array.change3.[2].add": {
+			Operation: Add, Path: "array.change3.[2].add", OldValue: nil, NewValue: "add",
+		},
 	}
 	delta = ExtensionDelta(delta)
 	for _, descriptor := range delta {
 		a.Equal(expectedExtension[descriptor.Path], descriptor)
 		delete(expectedExtension, descriptor.Path)
 	}
+	a.Len(expectedExtension, 0)
 }
 
 func TestExtensionDelta(t *testing.T) {
