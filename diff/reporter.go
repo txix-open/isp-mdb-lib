@@ -1,9 +1,13 @@
 package diff
 
 import (
-	"github.com/integration-system/go-cmp/cmp"
 	"reflect"
+	"strings"
+
+	"github.com/integration-system/go-cmp/cmp"
 )
+
+var arrayReplacer = strings.NewReplacer(`[`, `.[`)
 
 type AdditionalDataMaker func(op Operation, x, y reflect.Value, path string, step cmp.PathStep) interface{}
 
@@ -31,6 +35,7 @@ func (dc *diffCollector) Report(x, y reflect.Value, eq bool, p cmp.Path) {
 	if path == "" {
 		return
 	}
+	path = arrayReplacer.Replace(path)
 
 	xIsValid := x.IsValid()
 	yIsValid := y.IsValid()
