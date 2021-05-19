@@ -42,7 +42,7 @@ func (t Term) IsValid() bool {
 }
 
 type BinaryOperation struct {
-	Operator        Operator `schema:"Оператор,[=,!=,<,>,<=,>=,contains,not contains, starts with, not starts with, ends with, not ends with, exists, not exists]"`
+	Operator        Operator `valid:"in(=|!=|<|>|<=|>=|contains|not contains|starts with|not starts with|ends with|not ends with|exists|not exists)"`
 	Value           string   `schema:"Ожидаемое значение"`
 	Field           string   `schema:"Операнд,название поля к которому применяется оператор"`
 	MappingSrcField string   `schema:"Исходное название поля маппинга"`
@@ -56,7 +56,16 @@ func (bo BinaryOperation) IsValid() bool {
 		return false
 	}
 
-	return bo.Value != "" || (bo.Operator == Exists || bo.Operator == NotExists || bo.Operator == Equal)
+	switch {
+	case bo.Value == "" && (bo.Operator == Exists || bo.Operator == NotExists):
+		return true
+	case bo.Operator == Equal || bo.Operator == NotEqual:
+		return true
+	case bo.Value != "":
+		return true
+	default:
+		return false
+	}
 }
 
 type LogicOperation struct {
