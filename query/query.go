@@ -42,24 +42,22 @@ func (t Term) IsValid() bool {
 }
 
 type BinaryOperation struct {
-	Operator        Operator `valid:"in(=|!=|<|>|<=|>=|contains|not contains|starts with|not starts with|ends with|not ends with|exists|not exists)"`
+	Operator        Operator `valid:"in(=|!=|<|>|<=|>=|contains|not contains|starts with|not starts with|ends with|not ends with|exists|not exists)"  schema:"Оператор"`
 	Value           string   `schema:"Ожидаемое значение"`
-	Field           string   `schema:"Операнд,название поля к которому применяется оператор"`
+	Field           string   `valid:"required~Required" schema:"Операнд,название поля к которому применяется оператор"`
 	MappingSrcField string   `schema:"Исходное название поля маппинга"`
 	SearchInCustom  bool     `schema:"Поиск по расширенным данным,если используется поле из массива атрибутов ('documents.100016.ref_num'), то должно быть значение 'true'"`
 	IsPrimaryKey    bool     `schema:"Первичны ключ,если поле является первичным ключом для профиля, то рекомендуется значение true, для оптимизации поиска"`
 }
 
 func (bo BinaryOperation) IsValid() bool {
-	ok := bo.Field != "" && bo.Operator != ""
-	if !ok {
-		return false
-	}
-
 	switch {
-	case bo.Value == "" && (bo.Operator == Exists || bo.Operator == NotExists):
-		return true
-	case bo.Operator == Equal || bo.Operator == NotEqual:
+	case bo.Operator == Exists || bo.Operator == NotExists:
+		if bo.Value == "" {
+			return true
+		}
+		return false
+	case bo.Operator == Equal:
 		return true
 	case bo.Value != "":
 		return true
