@@ -66,6 +66,12 @@ type ResponseType struct {
 	Response_ErrorList []string `xml:"Response_ErrorList,omitempty"`
 }
 
+type AddEntryResponseType struct {
+	XMLName xml.Name `xml:"http://xmlns.dit.mos.ru/sudir/itb/connector AddEntryResponse"`
+
+	*ResponseType `xml:"Response,omitempty"`
+}
+
 type FindEntryRequestType struct {
 	XMLName xml.Name `xml:"http://xmlns.dit.mos.ru/sudir/itb/connector FindEntryRequest"`
 

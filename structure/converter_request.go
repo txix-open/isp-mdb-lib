@@ -79,6 +79,21 @@ type ConvertSearchRequest struct {
 	Source        *EntryType
 }
 
+type ConvertSudirRequest struct {
+	ApplicationId int32           `valid:"required~Required"`
+	Protocol      ProtocolVersion `valid:"required~Required"`
+	InnerProtocol ProtocolVersion `valid:"required~Required"`
+	Source        *EntryType
+}
+
+type ConvertSudirBatchRequest struct {
+	ApplicationId int32           `valid:"required~Required"`
+	Protocol      ProtocolVersion `valid:"required~Required"`
+	// using for converting data from SUDIR format to inner one
+	InnerProtocol ProtocolVersion `valid:"required~Required"`
+	Source        []*EntryType
+}
+
 type BatchConvertForFindServiceRequest struct {
 	*ConvertForFindServiceRequestPayload `valid:"required~Required"`
 	*AbstractConvertBatchRequest
