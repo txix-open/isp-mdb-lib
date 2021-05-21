@@ -2,6 +2,8 @@ package structure
 
 import (
 	"fmt"
+
+	"github.com/integration-system/isp-mdb-lib/entity"
 	"github.com/integration-system/isp-mdb-lib/query"
 	"github.com/integration-system/isp-mdb-lib/stubsV1/erl"
 	"google.golang.org/grpc/codes"
@@ -199,4 +201,17 @@ type ConvertAnySearchResponse struct {
 
 type MappingTypeResponse struct {
 	Type string
+}
+
+type SudirUpdateRecordRequest struct {
+	TechRecord       bool
+	Record           *entity.DataRecord `valid:"required~Required"`
+	SoftDelete       bool
+	DeleteOperations map[string]map[string]bool
+	Error            *ConvertSearchError
+}
+
+type ConvertPayloadResponse struct {
+	ConvertRequest *ConvertRequestPayload
+	Error          error
 }
