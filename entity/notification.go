@@ -24,6 +24,7 @@ type Notification struct {
 
 type TransitNotification struct {
 	*BaseNotification
+	Direct     map[int32]interface{} `json:",omitempty"`
 	Data       json.RawMessage
 	CustomData json.RawMessage
 }
