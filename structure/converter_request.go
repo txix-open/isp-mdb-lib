@@ -20,10 +20,11 @@ type AbstractConvertBatchRequest struct {
 }
 
 type ConvertRequestPayload struct {
-	Data                  interface{} `valid:"required~Required"`
-	CustomData            interface{}
-	AttachedObjectTypes   []string
-	FilterByAttachedTypes bool
+	Data                     interface{} `valid:"required~Required"`
+	CustomData               interface{}
+	AttachedObjectTypes      []string
+	FilterByAttachedTypes    bool
+	AllowToIncludeEmptyValue bool
 }
 
 func (p ConvertRequestPayload) CastToMaps() (map[string]interface{}, map[string]interface{}) {

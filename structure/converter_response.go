@@ -207,7 +207,7 @@ type SudirUpdateRecordRequest struct {
 	TechRecord       bool
 	Record           *entity.DataRecord `valid:"required~Required"`
 	SoftDelete       bool
-	DeleteOperations map[string]map[string]bool
+	DeleteOperations map[string]map[string]string
 	Error            *ConvertSearchError
 }
 
