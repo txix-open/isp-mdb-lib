@@ -41,20 +41,22 @@ type DeletedObject struct {
 			}
 		}
 		ObjectDeltaData: {
-			"VEHICLES": {
-				"1234567890_1": {
+			"VEHICLES": [
+				{
+					"ITEM_ID": "1234567890_1",
 					"VEHICLE_DESC": "TEST VEH 1"
 				},
-				"1234567890_2": {
+				{
+					"ITEM_ID": "1234567890_2",
 					"VEHICLE_DESC": ""
 				}
-			}
+			]
 		}
 	}
 */
 type DeltaInfo struct {
 	AttributeDeltaData map[string]map[string]interface{}
-	ObjectDeltaData    map[string]map[string]map[string]interface{}
+	ObjectDeltaData    map[string][]map[string]interface{}
 }
 
 type PdpDelta struct {
