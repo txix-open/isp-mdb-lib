@@ -21,6 +21,7 @@ const (
 	mdmConverterConvertToSudir               = "mdm-converter/sudir/convert"
 	mdmConverterConvertToSudirBatch          = "mdm-converter/sudir/convert_batch"
 	mdmConverterConvertToSudirBatchList      = "mdm-converter/sudir/convert_batch_list"
+	mdmConverterConvertToPdpSudirBatchList   = "mdm-converter/sudir/convert_pdp_batch_list"
 	mdmConverterConvertSearchRequestForSudir = "mdm-converter/sudir/convert_search_request"
 
 	mdmConverterConvertToFind               = "mdm-converter/find/convert"
@@ -137,17 +138,19 @@ var (
 	}
 	MdmDumperLinks = MdmDumperService{
 		MdmConverterService: struct {
-			ConvertToSudirBatchList string
-			ConvertToFindBatchList  string
-			ConvertAnyBatchList     string
-			ConvertErlBatchList     string
-			FilterBatchList         string
+			ConvertToSudirBatchList    string
+			ConvertToPdpSudirBatchList string
+			ConvertToFindBatchList     string
+			ConvertAnyBatchList        string
+			ConvertErlBatchList        string
+			FilterBatchList            string
 		}{
-			ConvertToSudirBatchList: mdmConverterConvertToSudirBatchList,
-			ConvertToFindBatchList:  mdmConverterConvertToFindBatchList,
-			ConvertAnyBatchList:     mdmConverterConvertAnyBatchList,
-			ConvertErlBatchList:     mdmConverterConvertErlBatchList,
-			FilterBatchList:         mdmConverterFilterDataBatchList,
+			ConvertToSudirBatchList:    mdmConverterConvertToSudirBatchList,
+			ConvertToPdpSudirBatchList: mdmConverterConvertToPdpSudirBatchList,
+			ConvertToFindBatchList:     mdmConverterConvertToFindBatchList,
+			ConvertAnyBatchList:        mdmConverterConvertAnyBatchList,
+			ConvertErlBatchList:        mdmConverterConvertErlBatchList,
+			FilterBatchList:            mdmConverterFilterDataBatchList,
 		},
 		MdmSearchService: struct {
 			Count string

@@ -81,11 +81,12 @@ type MdmApiServiceLinks struct {
 
 type MdmDumperService struct {
 	MdmConverterService struct {
-		ConvertToSudirBatchList string
-		ConvertToFindBatchList  string
-		ConvertAnyBatchList     string
-		ConvertErlBatchList     string
-		FilterBatchList         string
+		ConvertToSudirBatchList    string
+		ConvertToPdpSudirBatchList string
+		ConvertToFindBatchList     string
+		ConvertAnyBatchList        string
+		ConvertErlBatchList        string
+		FilterBatchList            string
 	}
 	MdmSearchService struct {
 		Count string

@@ -3,6 +3,7 @@ package service
 import (
 	"github.com/integration-system/isp-lib/v2/backend"
 	"github.com/integration-system/isp-mdb-lib/modules"
+	"github.com/integration-system/isp-mdb-lib/pdp/pdpstructure"
 	"github.com/integration-system/isp-mdb-lib/structure"
 )
 
@@ -26,6 +27,11 @@ func (s *ConverterService) ConvertToSudirFindEntry(req []structure.BatchConvertF
 func (s *ConverterService) ConvertToSudir(req []structure.BatchConvertDataRequest) (structure.BatchListConvertForSudirResponse, error) {
 	res := make(structure.BatchListConvertForSudirResponse)
 	return res, s.convert(req, &res)
+}
+
+func (s *ConverterService) ConvertToPdpSudir(req []pdpstructure.BatchConvertPdpRequest) (structure.BatchListConvertForSudirResponse, error) {
+	res := make(structure.BatchListConvertForSudirResponse)
+	return res, s.convertPdp(req, &res)
 }
 
 func (s *ConverterService) ConvertToJson(req []structure.BatchConvertAnyRequest) (structure.BatchListConvertAnyResponse, error) {
@@ -66,6 +72,15 @@ func (s *ConverterService) convertFind(req []structure.BatchConvertForFindServic
 func (s *ConverterService) convert(req []structure.BatchConvertDataRequest, resPtr interface{}) error {
 	return s.client.Invoke(
 		modules.MdmDumperLinks.MdmConverterService.ConvertToSudirBatchList,
+		s.callerId,
+		req,
+		resPtr,
+	)
+}
+
+func (s *ConverterService) convertPdp(req []pdpstructure.BatchConvertPdpRequest, resPtr interface{}) error {
+	return s.client.Invoke(
+		modules.MdmDumperLinks.MdmConverterService.ConvertToPdpSudirBatchList,
 		s.callerId,
 		req,
 		resPtr,
