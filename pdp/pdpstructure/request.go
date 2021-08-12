@@ -11,6 +11,11 @@ type PdpUpsertRequest struct {
 	UpdateMethod pdp.HandleMethod
 }
 
+type PdpUpsertBatchRequest struct {
+	Requests     []structure.SudirUpdateRecordRequest
+	UpdateMethod pdp.HandleMethod
+}
+
 type BatchConvertPdpRequest struct {
 	*structure.ConvertRequestPayload `valid:"required~Required"`
 	*structure.AbstractConvertBatchRequest
