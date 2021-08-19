@@ -73,7 +73,7 @@ type SimpleDocument struct {
 
 type Citizen struct {
 	CitizenPk string                  `xml:"citizen_pk,omitempty"`
-	Name      CitizenName             `xml:"name,omitempty"`
+	Name      *CitizenName            `xml:"name,omitempty"`
 	Birthday  *StringWithLastModified `xml:"birthday,omitempty"`
 	Sex       *StringWithLastModified `xml:"sex,omitempty"`
 	Snils     *StringWithLastModified `xml:"snils,omitempty"`
