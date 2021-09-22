@@ -26,13 +26,11 @@ type BatchConvertPdpRequest struct {
 	DeletedObject e.q.
 	{
 		Id: "62D1FA909140BABC0C10DA90A13B041E30",
-		DeleteFlag: "VehicleDelete",
 		ObjectGroup: "VEHICLE",
 	}
 */
 type DeletedObject struct {
 	Id          string
-	DeleteFlag  string
 	ObjectGroup string
 }
 
