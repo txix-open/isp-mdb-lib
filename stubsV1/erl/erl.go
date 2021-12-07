@@ -91,12 +91,12 @@ type IdentityDocuments struct {
 }
 
 type CitizenDoc struct {
-	DoctypePk      string `xml:"doctype_pk,omitempty"`
-	Serial         string `xml:"serial,omitempty"`
-	Number         string `xml:"number,omitempty"`
-	DocIssuedate   string `xml:"doc_issuedate,omitempty"`
-	DocIssuePlace  string `xml:"doc_issue_place,omitempty"`
-	DocauthorityPk string `xml:"docauthority_pk,omitempty"`
-	IsDropped      string `xml:"is_dropped,omitempty"`
-	LastModified   string `xml:"last_modified,attr"`
+	DoctypePk            string `xml:"doctype_pk,omitempty"`
+	Serial               string `xml:"serial,omitempty"`
+	Number               string `xml:"number,omitempty"`
+	DocIssuedate         string `xml:"doc_issuedate,omitempty"`
+	IdentificationIssuer string `xml:"identification_issuer,omitempty"`
+	DocauthorityPk       string `xml:"docauthority_pk,omitempty"`
+	IsDropped            string `xml:"is_dropped,omitempty"`
+	LastModified         string `xml:"last_modified,attr"`
 }
