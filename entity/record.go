@@ -15,6 +15,7 @@ type BaseRecord struct {
 	ExternalId string `valid:"required~Required"`
 	Version    int64  `valid:"required~Required"`
 	Type       string
+	Delete     bool
 	UpdatedAt  time.Time
 	CreatedAt  time.Time
 }
