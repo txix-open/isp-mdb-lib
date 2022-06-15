@@ -14,6 +14,7 @@ type PdpUpsertRequest struct {
 type PdpUpsertBatchRequest struct {
 	Requests     []structure.SudirUpdateRecordRequest
 	UpdateMethod pdp.HandleMethod
+	AppSource    int32
 }
 
 type BatchConvertPdpRequest struct {
@@ -75,4 +76,5 @@ type PdpNotification struct {
 
 type PdpNotificationMessage struct {
 	Notifications []PdpNotification
+	AppSource     int32
 }
