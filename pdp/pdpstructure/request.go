@@ -1,20 +1,28 @@
 package pdpstructure
 
 import (
-	"github.com/integration-system/isp-mdb-lib/entity"
 	"github.com/integration-system/isp-mdb-lib/pdp"
+	"github.com/integration-system/isp-mdb-lib/pdp/pdpentity"
 	"github.com/integration-system/isp-mdb-lib/structure"
 )
 
 type PdpUpsertRequest struct {
-	structure.SudirUpdateRecordRequest
+	SudirUpdateRecordRequest
 	UpdateMethod pdp.HandleMethod
 }
 
 type PdpUpsertBatchRequest struct {
-	Requests     []structure.SudirUpdateRecordRequest
+	Requests     []SudirUpdateRecordRequest
 	UpdateMethod pdp.HandleMethod
 	AppSource    int32
+}
+
+type SudirUpdateRecordRequest struct {
+	TechRecord       bool
+	Record           *pdpentity.DataRecord `valid:"required~Required"`
+	SoftDelete       bool
+	DeleteOperations map[string]map[string]string
+	Error            *structure.ConvertSearchError
 }
 
 type BatchConvertPdpRequest struct {
@@ -69,7 +77,7 @@ type PdpDelta struct {
 }
 
 type PdpNotification struct {
-	entity.Notification
+	pdpentity.Notification
 
 	PdpDelta PdpDelta
 }
