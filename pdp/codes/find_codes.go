@@ -1,4 +1,4 @@
-package pdpcodes
+package codes
 
 type FindPDPCode int32
 
