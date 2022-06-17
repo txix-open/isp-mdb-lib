@@ -1,4 +1,4 @@
-package pdpcodes
+package codes
 
 type SudirPDPCode int32
 

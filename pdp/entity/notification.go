@@ -1,4 +1,4 @@
-package pdpentity
+package entity
 
 import (
 	"encoding/json"

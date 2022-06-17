@@ -1,10 +1,10 @@
-package pdpstructure
+package structure
 
 import (
 	"errors"
 	"fmt"
 
-	"github.com/integration-system/isp-mdb-lib/pdp/pdpcodes"
+	"github.com/integration-system/isp-mdb-lib/pdp/codes"
 	"github.com/integration-system/isp-mdb-lib/structure"
 	"github.com/integration-system/isp-mdb-lib/stubsV2/findV2"
 	"github.com/integration-system/isp-mdb-lib/stubsV2/sudirV2"
@@ -12,26 +12,26 @@ import (
 
 type PayloadResponse struct {
 	ConvertRequest *structure.ConvertRequestPayload
-	Error          *pdpcodes.PdpError
+	Error          *codes.PdpError
 }
 
-func GetResponseWithCode(code pdpcodes.SudirPDPCode, errArgs ...interface{}) *sudirV2.ResponseType {
-	if errorDesc, ok := pdpcodes.GetDescByCode(code); ok {
+func GetResponseWithCode(code codes.SudirPDPCode, errArgs ...interface{}) *sudirV2.ResponseType {
+	if errorDesc, ok := codes.GetDescByCode(code); ok {
 		return &sudirV2.ResponseType{
 			Response_Code:        int32(code),
 			Response_Description: fmt.Sprintf(errorDesc, errArgs...),
 		}
 	}
 
-	desc, _ := pdpcodes.GetDescByCode(pdpcodes.InternalError)
+	desc, _ := codes.GetDescByCode(codes.InternalError)
 	return &sudirV2.ResponseType{
-		Response_Code:        int32(pdpcodes.InternalError),
+		Response_Code:        int32(codes.InternalError),
 		Response_Description: desc,
 	}
 }
 
 func GetResponseWithError(err error) *sudirV2.ResponseType {
-	var pdpErr *pdpcodes.PdpError
+	var pdpErr *codes.PdpError
 	if ok := errors.As(err, &pdpErr); ok {
 		return &sudirV2.ResponseType{
 			Response_Code:        int32(pdpErr.GetCode()),
@@ -39,24 +39,24 @@ func GetResponseWithError(err error) *sudirV2.ResponseType {
 		}
 	}
 
-	desc, _ := pdpcodes.GetDescByCode(pdpcodes.InternalError)
+	desc, _ := codes.GetDescByCode(codes.InternalError)
 	return &sudirV2.ResponseType{
-		Response_Code:        int32(pdpcodes.InternalError),
+		Response_Code:        int32(codes.InternalError),
 		Response_Description: desc,
 	}
 }
 
-func GetFindResponseWithCode(code pdpcodes.FindPDPCode, errArgs ...interface{}) *findV2.Response {
-	if errorDesc, ok := pdpcodes.GetDescByFindCode(code); ok {
+func GetFindResponseWithCode(code codes.FindPDPCode, errArgs ...interface{}) *findV2.Response {
+	if errorDesc, ok := codes.GetDescByFindCode(code); ok {
 		return &findV2.Response{
 			Code:        int32(code),
 			Description: fmt.Sprintf(errorDesc, errArgs...),
 		}
 	}
 
-	desc, _ := pdpcodes.GetDescByFindCode(pdpcodes.FindInternalError)
+	desc, _ := codes.GetDescByFindCode(codes.FindInternalError)
 	return &findV2.Response{
-		Code:        int32(pdpcodes.FindInternalError),
+		Code:        int32(codes.FindInternalError),
 		Description: desc,
 	}
 }
