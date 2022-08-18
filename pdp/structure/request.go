@@ -85,5 +85,6 @@ type PdpNotification struct {
 type PdpNotificationMessage struct {
 	Notifications        []PdpNotification
 	ReUploadNotification bool
+	Delete               bool
 	AppSource            int32
 }
