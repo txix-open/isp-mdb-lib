@@ -33,13 +33,13 @@ type SystemInfo struct {
 }
 
 type EntryType struct {
-	EntryName string `xml:"EntryName,omitempty"`
+	EntryName string `xml:"EntryName"`
 
 	Seq int64 `xml:"Seq,omitempty"`
 
-	Attribute []*Attribute `xml:"Attribute,omitempty"`
+	Attribute []*Attribute `xml:"Attribute"`
 
-	Object []*Object `xml:"Object,omitempty"`
+	Object []*Object `xml:"Object"`
 }
 
 type EntryListType struct {
@@ -47,15 +47,13 @@ type EntryListType struct {
 }
 
 type Attribute struct {
-	Name string `xml:"Name,omitempty"`
-
-	Value []string `xml:"Value,omitempty"`
+	Name  string   `xml:"Name"`
+	Value []string `xml:"Value"`
 }
 
 type Object struct {
-	Name string `xml:"Name,omitempty"`
-
-	Attribute []*Attribute `xml:"Attribute,omitempty"`
+	Name      string       `xml:"Name"`
+	Attribute []*Attribute `xml:"Attribute"`
 }
 
 type ResponseType struct {
