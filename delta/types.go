@@ -7,6 +7,7 @@ const (
 	DeleteField     = Operation("DELETE_FIELD")
 	DeleteArrayItem = Operation("DELETE_ARRAY_ITEM")
 	AddArrayItem    = Operation("ADD_ARRAY_ITEM")
+	DeleteBlock     = Operation("DELETE_BLOCK")
 )
 
 type Changelog struct {
