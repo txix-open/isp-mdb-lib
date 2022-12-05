@@ -21,9 +21,9 @@ type EntryListType struct {
 }
 
 type Attribute struct {
-	Name string `xml:"Name,omitempty"`
+	Name string `xml:"Name"`
 
-	Value []string `xml:"Value,omitempty"`
+	Value []string `xml:"Value"`
 }
 
 type ResponseType struct {
