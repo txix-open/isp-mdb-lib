@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/go-pg/pg/v9 v9.2.1
+	github.com/hooklift/gowsdl v0.5.0
 	github.com/integration-system/bellows v1.0.1
 	github.com/integration-system/go-cmp v0.0.0-20190131081942-ac5582987a2f
 	github.com/integration-system/gowsdl v1.0.0
