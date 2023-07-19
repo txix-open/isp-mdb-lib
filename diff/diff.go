@@ -19,7 +19,7 @@ const (
 	ArraySwap   Operation = "ARRAY_SWAP"
 )
 
-var mapIndexRegexp = regexp.MustCompile(`\.\[\d+]`)
+var mapIndexRegexp = regexp.MustCompile(`\.\[\w+]`)
 
 type (
 	Operation string
