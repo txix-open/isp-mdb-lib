@@ -38,6 +38,8 @@ func (s Service) Apply(data map[string]any, changelogs []delta.Changelog) error 
 			err = s.deleteArrayItemOperation(data, changelog)
 		case delta.AddArrayItem:
 			err = s.addArrayItemOperation(data, changelog)
+		case delta.ExtraOperation:
+			continue
 		default:
 			err = errors.New("unexpected operation")
 		}
