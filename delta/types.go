@@ -8,6 +8,7 @@ const (
 	DeleteArrayItem = Operation("DELETE_ARRAY_ITEM")
 	AddArrayItem    = Operation("ADD_ARRAY_ITEM")
 	DeleteBlock     = Operation("DELETE_BLOCK")
+	ExtraOperation  = Operation("EXTRA")
 )
 
 type Changelog struct {
