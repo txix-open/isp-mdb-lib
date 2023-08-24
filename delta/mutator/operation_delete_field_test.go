@@ -76,7 +76,7 @@ func (t *TestServiceApply) Test_DeleteField_Array_NewBlock() {
 		},
 	}
 	err := t.service.Apply(data, changelogs)
-	t.Require().Error(err)
+	t.Require().NoError(err)
 }
 
 func (t *TestServiceApply) Test_DeleteField_Array_EmptyItem() {

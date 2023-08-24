@@ -144,7 +144,7 @@ func (s Service) deleteFieldOperationForArray(data map[string]any, change delta.
 
 	dataBlock, exist := data[change.Path.BlockName]
 	if !exist {
-		return errors.Errorf("%s is not exist in data", change.Path.BlockName)
+		return nil // nothing to delete
 	}
 
 	itemBlock, ok := dataBlock.([]any)
@@ -176,7 +176,7 @@ func (s Service) deleteFieldOperationForArray(data map[string]any, change delta.
 		}
 	}
 	if !itemIdIsExist {
-		return errors.Errorf("%s doesn't have %s = %s", change.Path.BlockName, itemIdPath, change.Path.ItemId)
+		return nil // nothing to delete
 	}
 
 	data[change.Path.BlockName] = itemBlock
