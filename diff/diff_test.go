@@ -325,6 +325,20 @@ func TestReplaceArray(t *testing.T) {
 			}},
 			newPath: "$$cards.9.mdm_obj_id",
 		},
+		{
+			d: Delta{{
+				NewValue: "1", Operation: Add,
+				Path: "$$cards.9.[5E13DEE3-8953-4B83-8F3A-A238D19DF108].mdm_obj_id",
+			}},
+			newPath: "$$cards.9.mdm_obj_id",
+		},
+		{
+			d: Delta{{
+				NewValue: "1", Operation: Add,
+				Path: "$$cards.9.[аЯвФ-ia51-r1--двЁ].mdm_obj_id",
+			}},
+			newPath: "$$cards.9.mdm_obj_id",
+		},
 	} {
 		actual := ReplaceArray(e.d)
 		for _, descriptor := range actual {
