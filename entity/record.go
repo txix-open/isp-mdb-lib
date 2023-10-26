@@ -20,6 +20,7 @@ type BaseRecord struct {
 	CreatedAt  time.Time
 }
 
+// nolint:unused
 type DataRecord struct {
 	tableName string `pg:"?db_schema.data_records" json:"-"`
 	*BaseRecord
@@ -27,6 +28,7 @@ type DataRecord struct {
 	CustomData map[string]interface{}
 }
 
+// nolint:unused
 type TransitDataRecord struct {
 	tableName string `pg:"?db_schema.data_records" json:"-"`
 	*BaseRecord
