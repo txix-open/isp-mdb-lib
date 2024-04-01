@@ -3,7 +3,7 @@ package entity
 import (
 	"encoding/json"
 
-	"github.com/integration-system/isp-mdb-lib/diff"
+	"github.com/txix-open/isp-mdb-lib/diff"
 )
 
 type BaseNotification struct {

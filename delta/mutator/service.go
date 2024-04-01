@@ -2,8 +2,8 @@
 package mutator
 
 import (
-	"github.com/integration-system/isp-mdb-lib/delta"
 	"github.com/pkg/errors"
+	"github.com/txix-open/isp-mdb-lib/delta"
 )
 
 const (

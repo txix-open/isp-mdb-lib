@@ -2,7 +2,6 @@ package findV1
 
 import (
 	"encoding/xml"
-	"github.com/integration-system/gowsdl/soap"
 	"time"
 )
 
@@ -140,24 +139,4 @@ type Reference struct {
 
 type Find interface {
 	FindObjects(request *FindObjects) (*FindObjectsResponse, error)
-}
-
-type find struct {
-	client *soap.Client
-}
-
-func NewFind(client *soap.Client) Find {
-	return &find{
-		client: client,
-	}
-}
-
-func (service *find) FindObjects(request *FindObjects) (*FindObjectsResponse, error) {
-	response := new(FindObjectsResponse)
-	err := service.client.Call("", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
 }

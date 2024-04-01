@@ -1,7 +1,7 @@
 package structure
 
 import (
-	"github.com/integration-system/isp-mdb-lib/query"
+	"github.com/txix-open/isp-mdb-lib/query"
 )
 
 func GetPkFilterValue(cond *query.Term) string {

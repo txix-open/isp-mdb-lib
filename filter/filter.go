@@ -3,7 +3,7 @@ package filter
 import (
 	"strings"
 
-	u "github.com/integration-system/isp-mdb-lib/utils"
+	u "github.com/txix-open/isp-mdb-lib/utils"
 )
 
 type Filter struct {

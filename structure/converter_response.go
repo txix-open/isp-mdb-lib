@@ -3,9 +3,9 @@ package structure
 import (
 	"fmt"
 
-	"github.com/integration-system/isp-mdb-lib/entity"
-	"github.com/integration-system/isp-mdb-lib/query"
-	"github.com/integration-system/isp-mdb-lib/stubsV1/erl"
+	"github.com/txix-open/isp-mdb-lib/entity"
+	"github.com/txix-open/isp-mdb-lib/query"
+	"github.com/txix-open/isp-mdb-lib/stubsV1/erl"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

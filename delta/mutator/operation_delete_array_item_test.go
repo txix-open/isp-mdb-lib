@@ -2,7 +2,7 @@
 package mutator_test
 
 import (
-	"github.com/integration-system/isp-mdb-lib/delta"
+	"github.com/txix-open/isp-mdb-lib/delta"
 )
 
 func (t *TestServiceApply) Test_DeleteArrayItem_HappyPath() {

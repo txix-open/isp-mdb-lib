@@ -2,7 +2,6 @@ package sudirV2
 
 import (
 	"encoding/xml"
-	"github.com/integration-system/gowsdl/soap"
 	"time"
 )
 
@@ -223,108 +222,4 @@ type SudirItbPortType interface {
 	GetSessKey(request *GetSessKeyRequestType) (*GetSessKeyResponseType, error)
 
 	AddEntryEx(request *AddEntryExRequestType) (*AddEntryExResponseType, error)
-}
-
-type sudirItbPortType struct {
-	client *soap.Client
-}
-
-func NewSudirItbPortType(client *soap.Client) SudirItbPortType {
-	return &sudirItbPortType{
-		client: client,
-	}
-}
-
-func (service *sudirItbPortType) AddEntry(request *EntryType) (*ResponseType, error) {
-	response := new(ResponseType)
-	err := service.client.Call("urn::#AddEntry", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-func (service *sudirItbPortType) FindEntry(request *FindEntryRequestType) (*FindEntryResponseType, error) {
-	response := new(FindEntryResponseType)
-	err := service.client.Call("urn::#FindEntry", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-func (service *sudirItbPortType) DeleteEntry(request *DeleteEntryRequestType) (*DeleteEntryResponseType, error) {
-	response := new(DeleteEntryResponseType)
-	err := service.client.Call("urn::#DeleteEntry", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-func (service *sudirItbPortType) UpdateEntry(request *UpdateEntryRequestType) (*UpdateEntryResponseType, error) {
-	response := new(UpdateEntryResponseType)
-	err := service.client.Call("urn::#UpdateEntry", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-func (service *sudirItbPortType) UpdateEntryWithInterceptor(
-	request *UpdateEntryRequestType,
-	interceptor func(request string, response string),
-) (*UpdateEntryResponseType, error) {
-
-	response := new(UpdateEntryResponseType)
-	err := service.client.CallWithInterceptor("urn::#UpdateEntry", request, response, interceptor)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-func (service *sudirItbPortType) SelectEntries(request *SelectEntriesRequestType) (*SelectEntriesResponseType, error) {
-	response := new(SelectEntriesResponseType)
-	err := service.client.Call("urn::#SelectEntries", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-func (service *sudirItbPortType) GetNextEntries(request *GetNextEntriesRequestType) (*GetNextEntriesResponseType, error) {
-	response := new(GetNextEntriesResponseType)
-	err := service.client.Call("urn::#GetNextEntries", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-func (service *sudirItbPortType) GetSessKey(request *GetSessKeyRequestType) (*GetSessKeyResponseType, error) {
-	response := new(GetSessKeyResponseType)
-	err := service.client.Call("urn::#GetSessKey", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
-}
-
-func (service *sudirItbPortType) AddEntryEx(request *AddEntryExRequestType) (*AddEntryExResponseType, error) {
-	response := new(AddEntryExResponseType)
-	err := service.client.Call("urn::#AddEntryEx", request, response)
-	if err != nil {
-		return nil, err
-	}
-
-	return response, nil
 }

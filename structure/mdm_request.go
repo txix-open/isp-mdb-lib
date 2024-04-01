@@ -1,6 +1,6 @@
 package structure
 
-import "github.com/integration-system/isp-mdb-lib/entity"
+import "github.com/txix-open/isp-mdb-lib/entity"
 
 type DataRecordByExternalId struct {
 	ExternalId string `json:"externalId" valid:"required~Required"`

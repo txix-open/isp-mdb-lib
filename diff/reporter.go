@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/integration-system/go-cmp/cmp"
+	"github.com/txix-open/go-cmp/cmp"
 )
 
 var arrayReplacer = strings.NewReplacer(`[`, `.[`)

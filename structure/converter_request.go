@@ -1,8 +1,8 @@
 package structure
 
 import (
-	"github.com/integration-system/isp-mdb-lib/entity"
-	"github.com/integration-system/isp-mdb-lib/stubsV2/findV2"
+	"github.com/txix-open/isp-mdb-lib/entity"
+	"github.com/txix-open/isp-mdb-lib/stubsV2/findV2"
 )
 
 type NotificationTarget struct {

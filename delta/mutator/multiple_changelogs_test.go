@@ -3,7 +3,7 @@ package mutator_test
 import (
 	"encoding/json"
 
-	"github.com/integration-system/isp-mdb-lib/delta"
+	"github.com/txix-open/isp-mdb-lib/delta"
 )
 
 //nolint:funlen

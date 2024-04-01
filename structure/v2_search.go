@@ -1,6 +1,6 @@
 package structure
 
-import "github.com/integration-system/isp-mdb-lib/query"
+import "github.com/txix-open/isp-mdb-lib/query"
 
 type OneOfCondition struct {
 	Logic  *LogicCondition  //логическое условие

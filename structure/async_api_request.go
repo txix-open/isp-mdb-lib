@@ -1,6 +1,6 @@
 package structure
 
-import "github.com/integration-system/isp-mdb-lib/query"
+import "github.com/txix-open/isp-mdb-lib/query"
 
 type Amqp struct {
 	ExchangeName string `valid:"required~Required" schema:"Название точки маршрутизации"`

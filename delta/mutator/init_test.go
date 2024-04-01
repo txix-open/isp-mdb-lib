@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/integration-system/isp-mdb-lib/delta/mutator"
 	"github.com/stretchr/testify/suite"
+	"github.com/txix-open/isp-mdb-lib/delta/mutator"
 )
 
 func TestServiceApply_Suite(t *testing.T) {

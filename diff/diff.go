@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"regexp"
 
-	"github.com/integration-system/bellows"
-	"github.com/integration-system/go-cmp/cmp"
+	"github.com/txix-open/bellows"
+	"github.com/txix-open/go-cmp/cmp"
 )
 
 const (
