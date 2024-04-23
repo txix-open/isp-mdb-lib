@@ -1,6 +1,6 @@
 package consts
 
-type ValidationStatus string
+type ValidationStatus = string
 
 const (
 	ValidationStatusPreparingToRequest = ValidationStatus("PREPARING_TO_REQUEST")
@@ -12,7 +12,7 @@ const (
 	ValidationStatusExpired            = ValidationStatus("EXPIRED")
 )
 
-type ValidationSystem string
+type ValidationSystem = string
 
 const (
 	ValidationIPEVSystem = ValidationSystem("IPEV")
