@@ -27,8 +27,8 @@ github.com/txix-open/bellows v1.2.0 h1:CXv8nQaZtB/micraeRilYyj/gtfv+bqBgP5aPYQgj
 github.com/txix-open/bellows v1.2.0/go.mod h1:qbKCy+RTgD30Qpw1fyb3y3jp5Y9mGhLLxgae1l0W92o=
 github.com/txix-open/go-cmp v0.0.0-20240401171944-16b203530f60 h1:7SZ72lNU69g8eiT5rcRh1ubATZPs/J05NEIN7E47TYM=
 github.com/txix-open/go-cmp v0.0.0-20240401171944-16b203530f60/go.mod h1:jzpq0uwcdGq0OSNXZ6vv6UJkCOU/fLPgeoz+KkGDYgo=
-golang.org/x/net v0.22.0 h1:9sGLhx7iRIHEiX0oAJ3MRZMUCElJgy7Br1nO+AMN3Tc=
-golang.org/x/net v0.22.0/go.mod h1:JKghWKKOSdJwpW2GEx0Ja7fmaKnMsbu+MWVZTokSYmg=
+golang.org/x/net v0.23.0 h1:7EYJ93RZ9vYSZAIb2x3lnuvqO5zneoD6IvWjuhfxjTs=
+golang.org/x/net v0.23.0/go.mod h1:JKghWKKOSdJwpW2GEx0Ja7fmaKnMsbu+MWVZTokSYmg=
 golang.org/x/sys v0.18.0 h1:DBdB3niSjOA/O0blCZBqDefyWNYveAYMNF1Wum0DYQ4=
 golang.org/x/sys v0.18.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=
 golang.org/x/text v0.14.0 h1:ScX5w1eTa3QqT8oi6+ziP7dTV1S2+ALU0bI+0zXKWiQ=
