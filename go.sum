@@ -37,8 +37,8 @@ github.com/txix-open/bellows v1.2.0 h1:CXv8nQaZtB/micraeRilYyj/gtfv+bqBgP5aPYQgj
 github.com/txix-open/bellows v1.2.0/go.mod h1:qbKCy+RTgD30Qpw1fyb3y3jp5Y9mGhLLxgae1l0W92o=
 github.com/txix-open/go-cmp v0.0.0-20240401171944-16b203530f60 h1:7SZ72lNU69g8eiT5rcRh1ubATZPs/J05NEIN7E47TYM=
 github.com/txix-open/go-cmp v0.0.0-20240401171944-16b203530f60/go.mod h1:jzpq0uwcdGq0OSNXZ6vv6UJkCOU/fLPgeoz+KkGDYgo=
-github.com/txix-open/isp-kit v1.42.0 h1:y904ifb48rghH5iZ7rO+js4pJ/EY5h30W0cCnz8gy9E=
-github.com/txix-open/isp-kit v1.42.0/go.mod h1:BHRF3AYRcQtEtNvoQZXxTVj/CYOVMKhOcCD3n8CdsxE=
+github.com/txix-open/isp-kit v1.42.1 h1:1YB0AqO3Mu0mUrghmtpsBdFJV20rsoxq68nqBWLyYQU=
+github.com/txix-open/isp-kit v1.42.1/go.mod h1:BHRF3AYRcQtEtNvoQZXxTVj/CYOVMKhOcCD3n8CdsxE=
 golang.org/x/net v0.34.0 h1:Mb7Mrk043xzHgnRM88suvJFwzVrRfHEHJEl5/71CKw0=
 golang.org/x/net v0.34.0/go.mod h1:di0qlW3YNM5oh6GqDGQr92MyTozJPmybPK4Ev/Gm31k=
 golang.org/x/sys v0.29.0 h1:TPYlXGxvx1MGTn2GiZDhnjPA9wZzZeGKHHmKhHYvgaU=
