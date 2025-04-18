@@ -21,4 +21,5 @@ const (
 	ValidationMDMSystem  = ValidationSystem("MDM")
 	ValidationSystem4ME  = ValidationSystem("4ME")
 	ValidationIsvdSystem = ValidationSystem("ISVD")
+	ValidationMSHNSystem = ValidationSystem("MSHN")
 )
